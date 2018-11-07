@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL.h>
+#include "Vector2D.h"
 
 #define CREATE(__TYPE__) \
 static __TYPE__* create() \
@@ -23,17 +24,39 @@ static __TYPE__* create() \
 class Object
 {
 public:
-
-	Object();
-	Object(SDL_Renderer * renderer);
-
-	CREATE(Object);
-
 	virtual bool init();
-
 	virtual void update();
-	virtual void render();
+	virtual void draw();
+
+	void setPosition(int x, int y);
+
+	void setAnchorPoint(float x, float y);
+
+	void setScale(float scale);
+	void setScaleX(float scaleX);
+	void setScaleY(float scaleY);
+
+	SDL_Rect getRect() const;
+
+	void setVisible(bool visible);
+	bool isVisible() const;
 
 protected:
-	SDL_Renderer * _renderer;
+	Object(std::string fileName, std::string id);
+
+	std::string _textureID;
+
+	Vector2D _position;
+	Vector2D _velocity;
+	Vector2D _acceleration;
+
+	float _anchorX;
+	float _anchorY;
+
+	SDL_Rect _srcRect;
+	SDL_Rect _dstRect;
+
+	bool _visible;
+	float _scale;
+	int _opacity;
 };

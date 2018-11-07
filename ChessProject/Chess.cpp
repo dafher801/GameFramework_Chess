@@ -1,6 +1,6 @@
-#include <SDL_image.h>
-
 #include "Chess.h"
+
+Chess * Chess::_chessGame = nullptr;
 
 Chess::Chess()
 	: _running(true) {}
@@ -12,32 +12,17 @@ bool Chess::init(const char * title, int xpos, int ypos, int width, int height, 
 		_window = SDL_CreateWindow(title, xpos, ypos, width, height, false);
 
 		if (_window != nullptr)
-		{
 			_renderer = SDL_CreateRenderer(_window, -1, 0);
-		}
 	}
 	else
-	{
 		return false;
-	}
 
-	_board = Sprite::create(_renderer, "assets/images/Board.jpg");
-	_board->setPosition(width / 2, height / 2);
-	_objects.push_back(_board);
-	
-	for (int i = 0; i < 8; i++)
-	{
-		for (int j = 0; j < 8; j++)
-		{
-			_pieces[i][j] = Piece::create(_renderer, { i,j });
-			_objects.push_back(_pieces[i][j]);
+	SDL_Surface * surface = IMG_Load("assets/images/Board.jpg");
 
-			/*_pieces[i][j]->makeMoveButton("assets/images/MoveButton.png");
-			_pieces[i][j]->makeAttackButton("assets/images/AttackButton.png");
-			_pieces[i][j]->getMoveButton()->setVisible(false);
-			_pieces[i][j]->getAttackButton()->setVisible(false);*/
-		}
-	}
+	if (!TextureManager::getInstance()->load(surface, "Board", _renderer))
+		return false;
+
+
 
 	for (int i = 0; i < LENGTH; i++)
 	{
@@ -69,22 +54,6 @@ bool Chess::init(const char * title, int xpos, int ypos, int width, int height, 
 	return true;
 }
 
-void Chess::render()
-{
-	SDL_RenderClear(_renderer);
-
-	for (Object * object : _objects)
-		object->render();
-
-	SDL_RenderPresent(_renderer);
-}
-
-void Chess::update()
-{
-	for (Object * object : _objects)
-		object->update();
-}
-
 void Chess::handleEvents()
 {
 	SDL_Event event;
@@ -102,9 +71,43 @@ void Chess::handleEvents()
 	}
 }
 
+void Chess::update()
+{
+	for (Object * object : _objects)
+		object->update();
+}
+
+void Chess::render()
+{
+	SDL_RenderClear(_renderer);
+
+	for (Object * object : _objects)
+		object->draw();
+
+	SDL_RenderPresent(_renderer);
+}
+
 void Chess::clean()
 {
 	SDL_DestroyWindow(_window);
 	SDL_DestroyRenderer(_renderer);
 	SDL_Quit();
+}
+
+bool Chess::running()
+{
+	return _running;
+}
+
+Chess * Chess::getInstance()
+{
+	if (!_chessGame)
+		_chessGame = new Chess;
+
+	return _chessGame;
+}
+
+SDL_Renderer * Chess::getRenderer() const
+{
+	return _renderer;
 }

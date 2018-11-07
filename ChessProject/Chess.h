@@ -1,10 +1,12 @@
 #pragma once
 
 #include <SDL.h>
+#include <SDL_image.h>
 #include <vector>
 
 #include "Piece.h"
 #include "Sprite.h"
+#include "TextureManager.h"
 
 #define LENGTH 8
 
@@ -17,13 +19,20 @@ public:
 	~Chess() {}
 
 	bool init(const char * title, int xpos, int ypos, int width, int height, bool fullscreen);
-	void render();
-	void update();
 	void handleEvents();
+	void update();
+	void render();
 	void clean();
-	bool running() { return _running; }
+	bool running();
+
+	static Chess * getInstance();
+
+	SDL_Renderer * getRenderer() const;
 
 private:
+
+	static Chess * _chessGame;
+
 	SDL_Window * _window;
 	SDL_Renderer * _renderer;
 	bool _running;

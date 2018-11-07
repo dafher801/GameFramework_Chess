@@ -31,10 +31,10 @@ bool Pawn::init()
 	switch (_team)
 	{
 	case Unit::TEAM::BLACK:
-		_unit = Button::create(_renderer, "assets/images/BlackPawn.png");
+		_unit = Button::create("assets/images/BlackPawn.png");
 		break;
 	case Unit::TEAM::WHITE:
-		_unit = Button::create(_renderer, "assets/images/WhitePawn.png");
+		_unit = Button::create("assets/images/WhitePawn.png");
 		break;
 	}
 
