@@ -2,15 +2,15 @@
 
 #include <SDL.h>
 
-#include "Sprite.h"
+#include "Object.h"
 
-class Button : public Sprite
+class Button
 {
 public:
 
-	Button(SDL_Renderer * renderer, const char * fileName);
+	Button(const char * fileName);
 
-	static Button * create(SDL_Renderer * renderer, const char * fileName);
+	static Button * create(const char * fileName);
 
 	virtual bool init();
 
@@ -21,6 +21,7 @@ public:
 	bool isClicked() const;
 
 private:
+	Object * _button;
 	SDL_Point _mouse;
 	bool _clicked;
 };

@@ -8,6 +8,8 @@
 class TextureManager
 {
 public:
+	~TextureManager();
+
 	static TextureManager * getInstance();
 
 	std::map<std::string, SDL_Texture*> getTextureMap() const;

@@ -17,12 +17,11 @@ bool Chess::init(const char * title, int xpos, int ypos, int width, int height, 
 	else
 		return false;
 
-	SDL_Surface * surface = IMG_Load("assets/images/Board.jpg");
-
-	if (!TextureManager::getInstance()->load(surface, "Board", _renderer))
-		return false;
-
-
+	_board = Sprite::create("assets/images/Board.jpg", "Board");
+	_board->setAnchorPoint(0.5, 0.5);
+	_board->setPosition(550, 450);
+	_board->setScale(1.1);
+	_objects.push_back(_board);
 
 	for (int i = 0; i < LENGTH; i++)
 	{

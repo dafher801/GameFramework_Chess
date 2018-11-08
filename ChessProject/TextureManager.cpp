@@ -2,6 +2,15 @@
 
 TextureManager * TextureManager::_instance = nullptr;
 
+TextureManager::~TextureManager()
+{
+	for (std::pair<std::string, SDL_Texture*> iter : _textureMap)
+	{
+		SDL_DestroyTexture(iter.second);
+		_textureMap.erase(iter.first);
+	}
+}
+
 TextureManager * TextureManager::getInstance()
 {
 	if (!_instance)
@@ -20,11 +29,11 @@ bool TextureManager::load(SDL_Surface * surface, std::string id, SDL_Renderer * 
 	if (!surface)
 		return false;
 
-	SDL_Texture * Texture = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, surface);
 
-	if (Texture != nullptr)
+	if (texture != nullptr)
 	{
-		_textureMap[id] = Texture;
+		_textureMap[id] = texture;
 		return true;
 	}
 

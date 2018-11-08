@@ -3,20 +3,41 @@
 #include "TextureManager.h"
 
 Object::Object(std::string fileName, std::string id)
-	: _position(0, 0)
+	: _ID(id)
+	, _fileName(fileName)
+	, _position(0, 0)
 	, _velocity(0, 0)
-	, _acceleration(0, 0)
-{
-	SDL_Surface * surface = IMG_Load(fileName.c_str());
+	, _acceleration(0, 0) {}
 
-	if (!TextureManager::getInstance()->load(surface, id,
-		Chess::getInstance()->getRenderer()))
+Object * Object::create(std::string fileName, std::string id)
+{
+	Object * object = new Object(fileName, id);
+
+	if (object && object->init())
 	{
-		delete this;
+		return object;
+	}
+	else
+	{
+		delete object;
+		object = nullptr;
+		return object;
+	}
+}
+
+bool Object::init()
+{
+	SDL_Surface * surface = IMG_Load(_fileName.c_str());
+
+	if (!(SDL_Init(SDL_INIT_EVERYTHING) >= 0) ||
+		!TextureManager::getInstance()->load(surface, _ID, Chess::getInstance()->getRenderer()))
+	{
+		SDL_FreeSurface(surface);
+		return false;
 	}
 
-	SDL_SetTextureBlendMode(
-		TextureManager::getInstance()->getTextureMap()[id], SDL_BLENDMODE_BLEND);
+	/*SDL_SetTextureBlendMode(
+		TextureManager::getInstance()->getTextureMap()[_ID], SDL_BLENDMODE_BLEND);*/
 
 	_srcRect.x = _srcRect.y = 0;
 	_dstRect.w = _srcRect.w = surface->w;
@@ -24,25 +45,19 @@ Object::Object(std::string fileName, std::string id)
 
 	setPosition(0, 0);
 	setScale(1.0f);
-}
 
-bool Object::init()
-{
-	if ( !(SDL_Init(SDL_INIT_EVERYTHING) >= 0) )
-		return false;
-	
+	SDL_FreeSurface(surface);
 	return true;
 }
 
 void Object::update()
 {
-	_position += _velocity;
-	_velocity += _acceleration;
 }
 
 void Object::draw()
 {
-	//TextureManager::getInstance()->draw(_x, _y, _width, _height, )
+	TextureManager::getInstance()->draw(_ID, _dstRect.x,
+		_dstRect.y, _dstRect.w, _dstRect.h, Chess::getInstance()->getRenderer());
 }
 
 void Object::setPosition(int x, int y)
@@ -74,12 +89,12 @@ void Object::setScale(float scale)
 
 void Object::setScaleX(float scaleX)
 {
-	_dstRect.w = _surface->w * scaleX;
+	_dstRect.w = _srcRect.w * scaleX;
 }
 
 void Object::setScaleY(float scaleY)
 {
-	_dstRect.h = _surface->h * scaleY;
+	_dstRect.h = _srcRect.h * scaleY;
 }
 
 SDL_Rect Object::getRect() const
@@ -93,7 +108,8 @@ void Object::setVisible(bool visible)
 
 	_opacity = _visible ? 255 : 0;
 
-	SDL_SetTextureAlphaMod(_texture, _opacity);
+	SDL_SetTextureAlphaMod(
+		TextureManager::getInstance()->getTextureMap()[_ID], _opacity);
 }
 
 bool Object::isVisible() const

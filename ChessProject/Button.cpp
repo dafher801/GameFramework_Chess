@@ -1,12 +1,11 @@
 #include "Button.h"
 
-Button::Button(SDL_Renderer * renderer, const char * fileName)
-	: Sprite(renderer, fileName)
-	, _clicked(false) {}
+Button::Button(const char * fileName)
+	: _clicked(false) {}
 
-Button * Button::create(SDL_Renderer * renderer, const char * fileName)
+Button * Button::create(const char * fileName)
 {
-	Button * button = new Button(renderer, fileName);
+	Button * button = new Button(fileName);
 
 	if (button && button->init())
 	{
@@ -22,12 +21,7 @@ Button * Button::create(SDL_Renderer * renderer, const char * fileName)
 
 bool Button::init()
 {
-	if ( !Sprite::init() )
-	{
-		return false;
-	}
 
-	return true;
 }
 
 void Button::handleEvents()
@@ -51,13 +45,12 @@ void Button::handleEvents()
 
 void Button::update()
 {
-	_clicked = SDL_PointInRect(&_mouse, &Sprite::getRect());
-	Sprite::update();
+	//_clicked = SDL_PointInRect(&_mouse, &Sprite::getRect());
 }
 
 void Button::render()
 {
-	Sprite::render();
+	//Sprite::render();
 }
 
 bool Button::isClicked() const

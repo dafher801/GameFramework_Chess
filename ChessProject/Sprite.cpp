@@ -11,8 +11,7 @@ Sprite::Sprite(std::string fileName, std::string id)
 
 Sprite::~Sprite()
 {
-	/*SDL_FreeSurface(_surface);
-	SDL_DestroyTexture(_texture);*/
+	//SDL_DestroyTexture(_texture);
 }
 
 Sprite * Sprite::create(std::string fileName, std::string id)
@@ -37,9 +36,6 @@ bool Sprite::init()
 	{
 		return false;
 	}
-
-
-
 	
 	return true;
 }
@@ -49,7 +45,7 @@ void Sprite::update()
 	
 }
 
-void Sprite::render()
+void Sprite::draw()
 {
-	SDL_RenderCopy(Chess::getInstance()->getRenderer(), _texture, &_srcRect, &_dstRect);
+	Object::draw();
 }

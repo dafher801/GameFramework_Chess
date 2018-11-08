@@ -13,7 +13,7 @@ public:
 
 	virtual bool init();
 	virtual void update();
-	virtual void render();
+	virtual void draw();
 
 private:
 	Sprite(std::string fileName, std::string id);

@@ -44,7 +44,10 @@ public:
 protected:
 	Object(std::string fileName, std::string id);
 
-	std::string _textureID;
+	static Object * create(std::string fileName, std::string id);
+
+	std::string _ID;
+	std::string _fileName;
 
 	Vector2D _position;
 	Vector2D _velocity;
