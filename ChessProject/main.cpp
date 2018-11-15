@@ -12,6 +12,6 @@ int main(int argc, char * argv[])
 		}
 	}
 
-	Chess::getInstance()->clean();
+	Chess::getInstance()->quit();
 	return 0;
 }

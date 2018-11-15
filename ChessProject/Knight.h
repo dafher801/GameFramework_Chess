@@ -1,19 +1,18 @@
-//#pragma once
-//
-//#include "Unit.h"
-//
-//class Knight : public Unit
-//{
-//public:
-//
-//	Knight(SDL_Renderer * renderer, SDL_Point coord, NAME name, TEAM team);
-//
-//	static Knight * create(SDL_Renderer * renderer, SDL_Point coord, NAME name, TEAM team);
-//
-//	virtual bool init();
-//
-//	virtual void update();
-//	virtual void render();
-//
-//private:
-//};
+#pragma once
+
+#include "Unit.h"
+
+class Knight : public Unit
+{
+public:
+
+	Knight(int coord, std::string fileName, std::string id);
+
+	static Knight * create(int coord, NAME name, TEAM team);
+
+	virtual bool init();
+	virtual void update();
+	virtual void draw();
+
+	virtual void onVisibleButton();
+};

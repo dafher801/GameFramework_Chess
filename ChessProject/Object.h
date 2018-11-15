@@ -1,10 +1,12 @@
 #pragma once
 
 #include <SDL.h>
+#include <iostream>
+#include <vector>
 #include "Vector2D.h"
 
 #define CREATE(__TYPE__) \
-static __TYPE__* create() \
+static __TYPE__ * create() \
 { \
 	__TYPE__ * ret = new __TYPE__(); \
  \
@@ -18,7 +20,6 @@ static __TYPE__* create() \
 		ret = nullptr; \
 		return ret; \
 	} \
- \
 }
 
 class Object
@@ -27,6 +28,9 @@ public:
 	virtual bool init();
 	virtual void update();
 	virtual void draw();
+
+	void addChild(Object * object);
+	void removeChild(Object * object);
 
 	void setPosition(int x, int y);
 
@@ -60,6 +64,10 @@ protected:
 	SDL_Rect _dstRect;
 
 	bool _visible;
-	float _scale;
 	int _opacity;
+
+	float _scaleX;
+	float _scaleY;
+
+	std::vector<Object*> _objects;
 };

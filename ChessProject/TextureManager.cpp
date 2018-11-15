@@ -44,14 +44,14 @@ void TextureManager::draw(std::string id, int x, int y, int width, int height,
 	SDL_Renderer * renderer, SDL_RendererFlip flip)
 {
 	SDL_Rect srcRect;
-	SDL_Rect destRect;
+	SDL_Rect dstRect;
 
 	srcRect.x = 0;
 	srcRect.y = 0;
-	srcRect.w = destRect.w = width;
-	srcRect.h = destRect.h = height;
-	destRect.x = x;
-	destRect.y = y;
+	srcRect.w = dstRect.w = width;
+	srcRect.h = dstRect.h = height;
+	dstRect.x = x;
+	dstRect.y = y;
 
-	SDL_RenderCopyEx(renderer, _textureMap[id], &srcRect, &destRect, 0, 0, flip);
+	SDL_RenderCopyEx(renderer, _textureMap[id], &srcRect, &dstRect, 0, 0, flip);
 }

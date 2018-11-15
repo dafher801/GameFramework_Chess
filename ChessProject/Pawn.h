@@ -1,19 +1,24 @@
-//#pragma once
-//
-//#include "Unit.h"
-//
-//class Pawn : public Unit
-//{
-//public:
-//
-//	Pawn(SDL_Renderer * renderer, SDL_Point coord, NAME name, TEAM team);
-//
-//	static Pawn * create(SDL_Renderer * renderer, SDL_Point coord, NAME name, TEAM team);
-//
-//	virtual bool init();
-//
-//	virtual void update();
-//	virtual void render();
-//
-//private:
-//};
+#pragma once
+
+#include "Unit.h"
+
+class Pawn : public Unit
+{
+public:
+
+	Pawn(int coord, std::string fileName, std::string id);
+
+	static Pawn * create(int coord, NAME name, TEAM team);
+
+	virtual bool init();
+	virtual void update();
+	virtual void draw();
+
+	virtual void onVisibleButton();
+
+private:
+	void onMoveButton(int x, int y, int direction, Unit::TEAM nowTurn);
+	void onAttackButton(int x, int y, int direction, Unit::TEAM nowTurn);
+
+	bool _moved;
+};

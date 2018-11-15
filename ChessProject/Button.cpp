@@ -1,11 +1,12 @@
 #include "Button.h"
 
-Button::Button(const char * fileName)
-	: _clicked(false) {}
+Button::Button(std::string fileName, std::string id)
+	: Object(fileName, id)
+	, _command(nullptr) {}
 
-Button * Button::create(const char * fileName)
+Button * Button::create(std::string fileName, std::string id)
 {
-	Button * button = new Button(fileName);
+	Button * button = new Button(fileName, id);
 
 	if (button && button->init())
 	{
@@ -21,39 +22,43 @@ Button * Button::create(const char * fileName)
 
 bool Button::init()
 {
+	if (!Object::init())
+		return false;
 
-}
-
-void Button::handleEvents()
-{
-	SDL_Event event;
-
-	if (SDL_PollEvent(&event))
-	{
-		switch (event.type)
-		{
-		case SDL_MOUSEBUTTONDOWN:
-			_mouse.x = event.motion.x;
-			_mouse.y = event.motion.y;
-			break;
-
-		default:
-			break;
-		}
-	}
+	return true;
 }
 
 void Button::update()
 {
-	//_clicked = SDL_PointInRect(&_mouse, &Sprite::getRect());
+	handleInput();
+	Object::update();
 }
 
-void Button::render()
+void Button::draw()
 {
-	//Sprite::render();
+	Object::draw();
 }
 
-bool Button::isClicked() const
+void Button::handleInput()
 {
-	return _clicked;
+	_mousePoint = {
+		(int)InputHandler::getInstance()->getMousePosition()->getX(),
+		(int)InputHandler::getInstance()->getMousePosition()->getY()
+	};
+
+	if (InputHandler::getInstance()->getMouseButtonState(LEFT) &&
+		SDL_PointInRect(&_mousePoint, &_dstRect) && isVisible())
+	{
+		_command->execute();
+	}
+}
+
+void Button::setCommand(Command * newCommand)
+{
+	_command = newCommand;
+}
+
+Command * Button::getCommand() const
+{
+	return _command;
 }

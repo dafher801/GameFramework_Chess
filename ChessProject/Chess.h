@@ -4,44 +4,41 @@
 #include <SDL_image.h>
 #include <vector>
 
-#include "Piece.h"
-#include "Sprite.h"
+#include "Board.h"
 #include "TextureManager.h"
-
-#define LENGTH 8
 
 typedef std::vector<Object*> ObjectManager;
 
 class Chess
 {
 public:
-	Chess();
 	~Chess() {}
 
 	bool init(const char * title, int xpos, int ypos, int width, int height, bool fullscreen);
 	void handleEvents();
 	void update();
 	void render();
-	void clean();
+	void quit();
 	bool running();
 
 	static Chess * getInstance();
 
 	SDL_Renderer * getRenderer() const;
 
-private:
+	SDL_Rect getRect() const;
 
-	static Chess * _chessGame;
+	Unit::TEAM getNowTurn() const;
+
+private:
+	Chess();
+
+	static Chess * _chess;
 
 	SDL_Window * _window;
 	SDL_Renderer * _renderer;
+	SDL_Rect _rect;
+
 	bool _running;
-
-	Sprite * _board;
-
-	Sprite * sample[LENGTH][LENGTH];
-
-	Piece * _pieces[LENGTH][LENGTH];
-
+	Unit::TEAM _nowTurn;
 	ObjectManager _objects;
 };

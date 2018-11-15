@@ -6,26 +6,18 @@
 #include "Queen.h"
 #include "King.h"
 
-Piece::Piece(SDL_Renderer * renderer, SDL_Point coord)
-	: _renderer(renderer)
-	, _coord(coord)
-	, _unit(nullptr)
+Piece::Piece(int x, int y)
+	: _unit(nullptr)
 	, _move(nullptr)
 	, _attack(nullptr)
-
-	//칸을 맞추는 데 쓰이는 상수들
-	, _boardLength(8)
-	, _oneStep(73)
-	, _leftHigh({ 335,212 })
-	, _rightLow({ 335 + (_oneStep * _boardLength - 1), 212 + (_oneStep * _boardLength - 1) })
-
-	, _buttonScale(1.5)
+	, _buttonScale(1.3)
 {
+	_coord = (10 * (x + 1)) + (y + 1);
 }
 
-Piece * Piece::create(SDL_Renderer * renderer, SDL_Point coord)
+Piece * Piece::create(int x, int y)
 {
-	Piece * piece = new Piece(renderer, coord);
+	Piece * piece = new Piece(x, y);
 
 	if (piece && piece->init())
 	{
@@ -41,10 +33,23 @@ Piece * Piece::create(SDL_Renderer * renderer, SDL_Point coord)
 
 bool Piece::init()
 {
-	if ( !Object::init() )
-	{
+	if ( !(SDL_Init(SDL_INIT_EVERYTHING) >= 0) )
 		return false;
-	}
+
+	_move = Button::create("assets/images/MoveButton.png", "MoveButton");
+	_attack = Button::create("assets/images/AttackButton.png", "AttackButton");
+
+	_move->setPosition(LEFT_HIGH_X + (ONE_STEP * ((_coord / 10) - 1)),
+		LEFT_HIGH_Y + (ONE_STEP * ((_coord % 10) - 1)));
+
+	_attack->setPosition(LEFT_HIGH_X + (ONE_STEP * ((_coord / 10) - 1)),
+		LEFT_HIGH_Y + (ONE_STEP * ((_coord % 10) - 1)));
+
+	_move->setScale(_buttonScale);
+	_attack->setScale(_buttonScale);
+
+	_move->setVisible(false);
+	_attack->setVisible(false);
 
 	return true;
 }
@@ -54,23 +59,17 @@ void Piece::update()
 	if (_unit)
 		_unit->update();
 
-	if (_move)
-		_move->update();
-
-	if (_attack)
-		_attack->update();
+	_move->update();
+	_attack->update();
 }
 
-void Piece::render()
+void Piece::draw()
 {
 	if (_unit)
-		_unit->render();
+		_unit->draw();
 
-	if (_move)
-		_move->render();
-
-	if (_attack)
-		_attack->render();
+	_move->draw();
+	_attack->draw();
 }
 
 void Piece::makeUnit(Unit::NAME name, Unit::TEAM team)
@@ -78,42 +77,24 @@ void Piece::makeUnit(Unit::NAME name, Unit::TEAM team)
 	switch (name)
 	{
 	case Unit::NAME::PAWN:
-		_unit = Pawn::create(_renderer, _coord, name, team);
+		_unit = Pawn::create(_coord, name, team);
 		break;
 	case Unit::NAME::KNIGHT:
-		_unit = Knight::create(_renderer, _coord, name, team);
+		_unit = Knight::create(_coord, name, team);
 		break;
 	case Unit::NAME::BISHOP:
-		_unit = Bishop::create(_renderer, _coord, name, team);
+		_unit = Bishop::create(_coord, name, team);
 		break;
 	case Unit::NAME::ROOK:
-		_unit = Rook::create(_renderer, _coord, name, team);
+		_unit = Rook::create(_coord, name, team);
 		break;
 	case Unit::NAME::QUEEN:
-		_unit = Queen::create(_renderer, _coord, name, team);
+		_unit = Queen::create(_coord, name, team);
 		break;
 	case Unit::NAME::KING:
-		_unit = King::create(_renderer, _coord, name, team);
+		_unit = King::create(_coord, name, team);
 		break;
 	}
-}
-
-void Piece::makeMoveButton(const char * fileName)
-{
-	_move = Button::create(_renderer, fileName);
-	_move->setPosition(_leftHigh.x +
-		(_oneStep * _coord.x), _leftHigh.y + (_oneStep * _coord.y));
-	_move->setAnchorPoint(0.5, 0.5);
-	_move->setScale(_buttonScale);
-}
-
-void Piece::makeAttackButton(const char * fileName)
-{
-	_attack = Button::create(_renderer, fileName);
-	_attack->setPosition(_leftHigh.x +
-		(_oneStep * _coord.x), _leftHigh.y + (_oneStep * _coord.y));
-	_attack->setAnchorPoint(0.5, 0.5);
-	_attack->setScale(_buttonScale);
 }
 
 Unit * Piece::getUnit() const

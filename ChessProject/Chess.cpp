@@ -1,9 +1,11 @@
 #include "Chess.h"
+#include "InputHandler.h"
 
-Chess * Chess::_chessGame = nullptr;
+Chess * Chess::_chess = nullptr;
 
 Chess::Chess()
-	: _running(true) {}
+	: _running(true) 
+	, _nowTurn(Unit::TEAM::WHITE) {}
 
 bool Chess::init(const char * title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
@@ -11,63 +13,24 @@ bool Chess::init(const char * title, int xpos, int ypos, int width, int height, 
 	{
 		_window = SDL_CreateWindow(title, xpos, ypos, width, height, false);
 
+		_rect.x = xpos;
+		_rect.y = ypos;
+		_rect.w = width;
+		_rect.h = height;
+
 		if (_window != nullptr)
 			_renderer = SDL_CreateRenderer(_window, -1, 0);
 	}
 	else
 		return false;
 
-	_board = Sprite::create("assets/images/Board.jpg", "Board");
-	_board->setAnchorPoint(0.5, 0.5);
-	_board->setPosition(550, 450);
-	_board->setScale(1.1);
-	_objects.push_back(_board);
-
-	for (int i = 0; i < LENGTH; i++)
-	{
-		_pieces[i][LENGTH - 2]->makeUnit(Unit::NAME::PAWN, Unit::TEAM::WHITE);
-		_pieces[i][1]->makeUnit(Unit::NAME::PAWN, Unit::TEAM::BLACK);
-	}
-
-	_pieces[1][LENGTH - 1]->makeUnit(Unit::NAME::KNIGHT, Unit::TEAM::WHITE);
-	_pieces[6][LENGTH - 1]->makeUnit(Unit::NAME::KNIGHT, Unit::TEAM::WHITE);
-	_pieces[1][0]->makeUnit(Unit::NAME::KNIGHT, Unit::TEAM::BLACK);
-	_pieces[6][0]->makeUnit(Unit::NAME::KNIGHT, Unit::TEAM::BLACK);
-
-	_pieces[2][LENGTH - 1]->makeUnit(Unit::NAME::BISHOP, Unit::TEAM::WHITE);
-	_pieces[5][LENGTH - 1]->makeUnit(Unit::NAME::BISHOP, Unit::TEAM::WHITE);
-	_pieces[2][0]->makeUnit(Unit::NAME::BISHOP, Unit::TEAM::BLACK);
-	_pieces[5][0]->makeUnit(Unit::NAME::BISHOP, Unit::TEAM::BLACK);
-
-	_pieces[LENGTH - 1][LENGTH - 1]->makeUnit(Unit::NAME::ROOK, Unit::TEAM::WHITE);
-	_pieces[0][LENGTH - 1]->makeUnit(Unit::NAME::ROOK, Unit::TEAM::WHITE);
-	_pieces[LENGTH - 1][0]->makeUnit(Unit::NAME::ROOK, Unit::TEAM::BLACK);
-	_pieces[0][0]->makeUnit(Unit::NAME::ROOK, Unit::TEAM::BLACK);
-
-	_pieces[3][LENGTH - 1]->makeUnit(Unit::NAME::QUEEN, Unit::TEAM::WHITE);
-	_pieces[3][0]->makeUnit(Unit::NAME::QUEEN, Unit::TEAM::BLACK);
-
-	_pieces[4][LENGTH - 1]->makeUnit(Unit::NAME::KING, Unit::TEAM::WHITE);
-	_pieces[4][0]->makeUnit(Unit::NAME::KING, Unit::TEAM::BLACK);
-
+	_objects.push_back(Board::getInstance());
 	return true;
 }
 
 void Chess::handleEvents()
 {
-	SDL_Event event;
-
-	if (SDL_PollEvent(&event))
-	{
-		switch (event.type)
-		{
-		case SDL_QUIT:
-			_running = false;
-			break;
-		default:
-			break;
-		}
-	}
+	InputHandler::getInstance()->update();
 }
 
 void Chess::update()
@@ -86,8 +49,11 @@ void Chess::render()
 	SDL_RenderPresent(_renderer);
 }
 
-void Chess::clean()
+void Chess::quit()
 {
+	_running = false;
+	InputHandler::getInstance()->clean();
+
 	SDL_DestroyWindow(_window);
 	SDL_DestroyRenderer(_renderer);
 	SDL_Quit();
@@ -100,13 +66,23 @@ bool Chess::running()
 
 Chess * Chess::getInstance()
 {
-	if (!_chessGame)
-		_chessGame = new Chess;
+	if (!_chess)
+		_chess = new Chess;
 
-	return _chessGame;
+	return _chess;
 }
 
 SDL_Renderer * Chess::getRenderer() const
 {
 	return _renderer;
+}
+
+SDL_Rect Chess::getRect() const
+{
+	return _rect;
+}
+
+Unit::TEAM Chess::getNowTurn() const
+{
+	return _nowTurn;
 }

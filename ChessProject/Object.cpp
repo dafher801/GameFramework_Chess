@@ -7,7 +7,9 @@ Object::Object(std::string fileName, std::string id)
 	, _fileName(fileName)
 	, _position(0, 0)
 	, _velocity(0, 0)
-	, _acceleration(0, 0) {}
+	, _acceleration(0, 0)
+	, _visible(true)
+	, _opacity(255) {}
 
 Object * Object::create(std::string fileName, std::string id)
 {
@@ -36,13 +38,14 @@ bool Object::init()
 		return false;
 	}
 
-	/*SDL_SetTextureBlendMode(
-		TextureManager::getInstance()->getTextureMap()[_ID], SDL_BLENDMODE_BLEND);*/
+	SDL_SetTextureBlendMode(
+		TextureManager::getInstance()->getTextureMap()[_ID], SDL_BLENDMODE_BLEND);
 
 	_srcRect.x = _srcRect.y = 0;
 	_dstRect.w = _srcRect.w = surface->w;
 	_dstRect.h = _srcRect.h = surface->h;
 
+	setAnchorPoint(0.5, 0.5);
 	setPosition(0, 0);
 	setScale(1.0f);
 
@@ -52,12 +55,31 @@ bool Object::init()
 
 void Object::update()
 {
+	for (Object * iter : _objects)
+		iter->update();
 }
 
 void Object::draw()
 {
 	TextureManager::getInstance()->draw(_ID, _dstRect.x,
 		_dstRect.y, _dstRect.w, _dstRect.h, Chess::getInstance()->getRenderer());
+
+	for (Object * iter : _objects)
+		iter->draw();
+}
+
+void Object::addChild(Object * object)
+{
+	_objects.push_back(object);
+}
+
+void Object::removeChild(Object * object)
+{
+	for (std::vector<Object*>::iterator iter = _objects.begin();
+		object->_ID == (*iter)->_ID; iter++)
+	{
+		_objects.erase(iter);
+	}
 }
 
 void Object::setPosition(int x, int y)
@@ -65,8 +87,11 @@ void Object::setPosition(int x, int y)
 	_position.setX(x);
 	_position.setY(y);
 
-	_dstRect.x = _position.getX() - (_srcRect.w * _anchorX);
-	_dstRect.y = _position.getY() - (_srcRect.h * _anchorY);
+	_dstRect.x = x - (_srcRect.w * _anchorX);
+	_dstRect.y = y - (_srcRect.h * _anchorY);
+
+	for (Object * iter : _objects)
+		iter->setPosition(x, y);
 }
 
 void Object::setAnchorPoint(float x, float y)
@@ -79,22 +104,32 @@ void Object::setAnchorPoint(float x, float y)
 
 void Object::setScale(float scale)
 {
-	_scale = scale;
-
-	_dstRect.x = _position.getX() - (float)(_position.getX() - _dstRect.x) * _scale;
-	_dstRect.y = _position.getY() - (float)(_position.getY() - _dstRect.y) * _scale;
-	_dstRect.w *= _scale;
-	_dstRect.h *= _scale;
+	setScaleX(scale);
+	setScaleY(scale);
 }
 
 void Object::setScaleX(float scaleX)
 {
+	if (scaleX)
+		_scaleX = scaleX;
+
 	_dstRect.w = _srcRect.w * scaleX;
+	_dstRect.x = _position.getX() - (float)(_srcRect.w * _anchorX * scaleX);
+
+	for (Object * iter : _objects)
+		iter->setScaleX(scaleX);
 }
 
 void Object::setScaleY(float scaleY)
 {
+	if (scaleY)
+		_scaleY = scaleY;
+
 	_dstRect.h = _srcRect.h * scaleY;
+	_dstRect.y = _position.getY() - (float)(_srcRect.h * _anchorY * scaleY);
+
+	for (Object * iter : _objects)
+		iter->setScaleY(scaleY);
 }
 
 SDL_Rect Object::getRect() const
@@ -106,10 +141,16 @@ void Object::setVisible(bool visible)
 {
 	_visible = visible;
 
-	_opacity = _visible ? 255 : 0;
+	if (_visible)
+	{
+		setScaleX(_scaleX);
+		setScaleY(_scaleY);
+	}
+	else
+		setScale(0);
 
-	SDL_SetTextureAlphaMod(
-		TextureManager::getInstance()->getTextureMap()[_ID], _opacity);
+	for (Object * iter : _objects)
+		iter->setVisible(_visible);
 }
 
 bool Object::isVisible() const

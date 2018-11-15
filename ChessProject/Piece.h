@@ -5,22 +5,25 @@
 #include "Unit.h"
 #include "Button.h"
 
-class Piece : public Object
+#define ONE_STEP 81
+#define LEFT_HIGH_X 268
+#define LEFT_HIGH_Y 169
+#define RIGHT_ROW_X 835
+#define RIGHT_ROW_Y 736
+
+class Piece
 {
 public:
 
-	Piece(SDL_Renderer * renderer, SDL_Point coord);
+	Piece(int x, int y);
 
-	static Piece * create(SDL_Renderer * renderer, SDL_Point coord);
+	static Piece * create(int x, int y);
 
 	virtual bool init();
-
 	virtual void update();
-	virtual void render();
+	virtual void draw();
 
 	void makeUnit(Unit::NAME name, Unit::TEAM team);
-	void makeMoveButton(const char * fileName);
-	void makeAttackButton(const char * fileName);
 
 	Unit * getUnit() const;
 	Button * getMoveButton() const;
@@ -31,14 +34,7 @@ private:
 	Button * _move;
 	Button * _attack;
 
-	SDL_Point _coord;
-	SDL_Renderer * _renderer;
-
-	//칸을 맞추는 데 쓰이는 상수들
-	const int _boardLength;			  //체스판 길이
-	const int _oneStep;			      //체스판에서 한 칸의 길이
-	const SDL_Point _leftHigh;        //체스판의 맨 좌측, 상단 좌표
-	const SDL_Point _rightLow;        //체스판의 맨 우측, 하단 좌표
+	int _coord;
 
 	const float _buttonScale;		  //버튼의 크기
 };

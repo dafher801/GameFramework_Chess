@@ -1,27 +1,28 @@
 #pragma once
 
 #include <SDL.h>
-
 #include "Object.h"
+#include "Command.h"
+#include "InputHandler.h"
 
-class Button
+class Button : public Object
 {
 public:
 
-	Button(const char * fileName);
+	Button(std::string fileName, std::string id);
 
-	static Button * create(const char * fileName);
+	static Button * create(std::string fileName, std::string id);
 
 	virtual bool init();
-
-	virtual void handleEvents();
 	virtual void update();
-	virtual void render();
+	virtual void draw();
 
-	bool isClicked() const;
+	void handleInput();
+
+	void setCommand(Command * newCommand);
+	Command * getCommand() const;
 
 private:
-	Object * _button;
-	SDL_Point _mouse;
-	bool _clicked;
+	Command * _command;
+	SDL_Point _mousePoint;
 };
