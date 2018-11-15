@@ -157,3 +157,9 @@ bool Object::isVisible() const
 {
 	return _visible;
 }
+
+Action * Object::runAction(Action * action)
+{
+	action->setTarget(this);
+	return action;
+}

@@ -33,7 +33,7 @@ bool Board::init()
 		for (j = 0; j < LENGTH; j++)
 			_pieces[i][j] = Piece::create(i, j);
 
-	/*for (i = 0; i < LENGTH; i++)
+	for (i = 0; i < LENGTH; i++)
 	{
 		_pieces[i][1]->makeUnit(Unit::NAME::PAWN, Unit::TEAM::BLACK);
 		_pieces[i][6]->makeUnit(Unit::NAME::PAWN, Unit::TEAM::WHITE);
@@ -58,9 +58,7 @@ bool Board::init()
 	_pieces[3][7]->makeUnit(Unit::NAME::QUEEN, Unit::TEAM::WHITE);
 
 	_pieces[4][0]->makeUnit(Unit::NAME::KING, Unit::TEAM::BLACK);
-	_pieces[4][7]->makeUnit(Unit::NAME::KING, Unit::TEAM::WHITE);*/
-
-	_pieces[4][4]->makeUnit(Unit::NAME::QUEEN, Unit::TEAM::WHITE);
+	_pieces[4][7]->makeUnit(Unit::NAME::KING, Unit::TEAM::WHITE);
 	
 	return true;
 }

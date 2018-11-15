@@ -3,7 +3,9 @@
 #include <SDL.h>
 #include <iostream>
 #include <vector>
+
 #include "Vector2D.h"
+#include "Action.h"
 
 #define CREATE(__TYPE__) \
 static __TYPE__ * create() \
@@ -44,6 +46,8 @@ public:
 
 	void setVisible(bool visible);
 	bool isVisible() const;
+
+	Action * runAction(Action * action);
 
 protected:
 	Object(std::string fileName, std::string id);

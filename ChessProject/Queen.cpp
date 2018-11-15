@@ -81,14 +81,53 @@ void Queen::onVisibleHigh(Unit::TEAM nowTurn)
 		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
 
-	if (j >= 0 &&
-		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
+	if (j >= 0 && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
 	{
 		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
 	}
 }
 
 void Queen::onVisibleRightHigh(Unit::TEAM nowTurn)
+{
+	int i;
+	int j;
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+
+	for (i = x + 1, j = y - 1;
+		i < LENGTH && j >= 0 &&
+		!Board::getInstance()->getPieces()[i][j]->getUnit(); i++, j--)
+	{
+		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+	}
+
+	if (i < LENGTH && j >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
+	{
+		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
+	}
+}
+
+void Queen::onVisibleRight(Unit::TEAM nowTurn)
+{
+	int i;
+	int j;
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+
+	for (i = x + 1, j = y;
+		i < LENGTH && !Board::getInstance()->getPieces()[i][j]->getUnit(); i++)
+	{
+		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+	}
+
+	if (i < LENGTH && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
+	{
+		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
+	}
+}
+
+void Queen::onVisibleRightLow(Unit::TEAM nowTurn)
 {
 	int i;
 	int j;
@@ -109,47 +148,6 @@ void Queen::onVisibleRightHigh(Unit::TEAM nowTurn)
 	}
 }
 
-void Queen::onVisibleRight(Unit::TEAM nowTurn)
-{
-	int i;
-	int j;
-	int x = _coord / 10 - 1;
-	int y = _coord % 10 - 1;
-
-	for (i = x + 1, j = y;
-		i < LENGTH && !Board::getInstance()->getPieces()[i][j]->getUnit(); i++)
-	{
-		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-	}
-
-	if (i < LENGTH &&
-		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
-	{
-		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
-	}
-}
-
-void Queen::onVisibleRightLow(Unit::TEAM nowTurn)
-{
-	int i;
-	int j;
-	int x = _coord / 10 - 1;
-	int y = _coord % 10 - 1;
-
-	for (i = x + 1, j = y - 1;
-		i < LENGTH && j >= 0 &&
-		!Board::getInstance()->getPieces()[i][j]->getUnit(); i++, j--)
-	{
-		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-	}
-
-	if (i < LENGTH && j >= 0 &&
-		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
-	{
-		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
-	}
-}
-
 void Queen::onVisibleLow(Unit::TEAM nowTurn)
 {
 	int i;
@@ -157,15 +155,13 @@ void Queen::onVisibleLow(Unit::TEAM nowTurn)
 	int x = _coord / 10 - 1;
 	int y = _coord % 10 - 1;
 
-	for (i = x + 1, j = y - 1;
-		i < LENGTH && j >= 0 &&
-		!Board::getInstance()->getPieces()[i][j]->getUnit(); i++, j--)
+	for (i = x, j = y + 1;
+		j < LENGTH && !Board::getInstance()->getPieces()[i][j]->getUnit(); j++)
 	{
 		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
 
-	if (i < LENGTH && j >= 0 &&
-		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
+	if (j < LENGTH && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
 	{
 		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
 	}
@@ -178,14 +174,14 @@ void Queen::onVisibleLeftLow(Unit::TEAM nowTurn)
 	int x = _coord / 10 - 1;
 	int y = _coord % 10 - 1;
 
-	for (i = x - 1, j = y - 1;
-		i >= 0 && j >= 0 &&
-		!Board::getInstance()->getPieces()[i][j]->getUnit(); i--, j--)
+	for (i = x - 1, j = y + 1;
+		i >= 0 && j < LENGTH &&
+		!Board::getInstance()->getPieces()[i][j]->getUnit(); i--, j++)
 	{
 		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
 
-	if (i >= 0 && j >= 0 &&
+	if (i >= 0 && j < LENGTH &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
 	{
 		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
@@ -205,8 +201,7 @@ void Queen::onVisibleLeft(Unit::TEAM nowTurn)
 		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
 
-	if (i >= 0 &&
-		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
+	if (i >= 0 && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
 	{
 		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
 	}
@@ -219,14 +214,14 @@ void Queen::onVisibleLeftHigh(Unit::TEAM nowTurn)
 	int x = _coord / 10 - 1;
 	int y = _coord % 10 - 1;
 
-	for (i = x - 1, j = y + 1;
-		i >= 0 && j < LENGTH &&
-		!Board::getInstance()->getPieces()[i][j]->getUnit(); i--, j++)
+	for (i = x - 1, j = y - 1;
+		i >= 0 && j >= 0 &&
+		!Board::getInstance()->getPieces()[i][j]->getUnit(); i--, j--)
 	{
 		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
 
-	if (i >= 0 && j < LENGTH &&
+	if (i >= 0 && j >= 0 &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
 	{
 		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
