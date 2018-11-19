@@ -94,6 +94,11 @@ void Object::setPosition(int x, int y)
 		iter->setPosition(x, y);
 }
 
+Vector2D Object::getPosition() const
+{
+	return _position;
+}
+
 void Object::setAnchorPoint(float x, float y)
 {
 	_anchorX = x;
@@ -158,8 +163,8 @@ bool Object::isVisible() const
 	return _visible;
 }
 
-Action * Object::runAction(Action * action)
-{
-	action->setTarget(this);
-	return action;
-}
+//Action * Object::runAction(Action * action)
+//{
+//	action->setTarget(this);
+//	return action;
+//}

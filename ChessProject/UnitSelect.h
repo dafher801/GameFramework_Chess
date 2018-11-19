@@ -1,16 +1,17 @@
 #pragma once
 
 #include "Command.h"
+#include "Unit.h"
 
-class UnitButton : public Command
+class UnitSelect : public Command
 {
 public:
-	UnitButton(int coord);
+	UnitSelect(Unit * unit);
 
 	virtual void execute();
 
 	void onVisibleButton();
 	
 private:
-	int _coord;
+	Unit * _unit;
 };

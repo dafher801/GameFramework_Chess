@@ -30,6 +30,9 @@ public:
 
 	virtual void onVisibleButton() = 0;
 
+	void onSelected();
+	void offSelected();
+
 	NAME getName() const;
 	TEAM getTeam() const;
 

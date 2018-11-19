@@ -7,6 +7,9 @@
 #include "Board.h"
 #include "TextureManager.h"
 
+#define FPS 60
+#define DELAY_TIME 1000.0f / FPS
+
 typedef std::vector<Object*> ObjectManager;
 
 class Chess

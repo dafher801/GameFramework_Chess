@@ -23,16 +23,6 @@ void InputHandler::onMouseButtonDown(SDL_Event event)
 	{
 	case SDL_BUTTON_LEFT:
 		_mouseButtonStates[LEFT] = true;
-
-		for (int i = 0; i < LENGTH; i++)
-		{
-			for (int j = 0; j < LENGTH; j++)
-			{
-				Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(false);
-				Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(false);
-			}
-		}
-
 		break;
 	case SDL_BUTTON_MIDDLE:
 		_mouseButtonStates[MIDDLE] = true;

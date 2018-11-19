@@ -1,7 +1,7 @@
 #include "Unit.h"
 #include "Board.h"
 #include "Piece.h"
-#include "UnitButton.h"
+#include "UnitSelect.h"
 
 Unit::Unit(int coord, std::string fileName, std::string id)
 	: Button(fileName, id)
@@ -25,7 +25,7 @@ bool Unit::init()
 	setAnchorPoint(0.5, 0.5);
 	setScale(_scale);
 
-	setCommand(new UnitButton(_coord));
+	setCommand(new UnitSelect(this));
 
 	return true;
 }
@@ -38,6 +38,16 @@ void Unit::update()
 void Unit::draw()
 {
 	Button::draw();
+}
+
+void Unit::onSelected()
+{
+	_selected = true;
+}
+
+void Unit::offSelected()
+{
+	_selected = false;
 }
 
 Unit::NAME Unit::getName() const

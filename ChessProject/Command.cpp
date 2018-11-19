@@ -1,10 +1,7 @@
 #include "Board.h"
-#include "UnitButton.h"
+#include "Command.h"
 
-UnitButton::UnitButton(int coord)
-	: _coord(coord) {}
-
-void UnitButton::execute()
+void Command::execute()
 {
 	int i, j;
 
@@ -16,12 +13,4 @@ void UnitButton::execute()
 			Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(false);
 		}
 	}
-
-	onVisibleButton();
-}
-
-void UnitButton::onVisibleButton()
-{
-	Board::getInstance()->getPieces()[_coord / 10 - 1][_coord % 10 - 1]
-		->getUnit()->onVisibleButton();
 }

@@ -5,6 +5,9 @@
 #include "Rook.h"
 #include "Queen.h"
 #include "King.h"
+#include "UnitMove.h"
+#include "UnitAttack.h"
+#include "UnitManager.h"
 
 Piece::Piece(int x, int y)
 	: _unit(nullptr)
@@ -44,6 +47,9 @@ bool Piece::init()
 
 	_attack->setPosition(LEFT_HIGH_X + (ONE_STEP * ((_coord / 10) - 1)),
 		LEFT_HIGH_Y + (ONE_STEP * ((_coord % 10) - 1)));
+
+	_move->setCommand(new UnitMove);
+	_move->setCommand(new UnitAttack);
 
 	_move->setScale(_buttonScale);
 	_attack->setScale(_buttonScale);
@@ -95,6 +101,13 @@ void Piece::makeUnit(Unit::NAME name, Unit::TEAM team)
 		_unit = King::create(_coord, name, team);
 		break;
 	}
+
+	UnitManager::getInstance()->getUnits()[_coord] = _unit;
+}
+
+void Piece::setUnit(Unit * unit)
+{
+	_unit = unit;
 }
 
 Unit * Piece::getUnit() const

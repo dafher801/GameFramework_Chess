@@ -14,9 +14,6 @@
 class Piece
 {
 public:
-
-	Piece(int x, int y);
-
 	static Piece * create(int x, int y);
 
 	virtual bool init();
@@ -25,11 +22,14 @@ public:
 
 	void makeUnit(Unit::NAME name, Unit::TEAM team);
 
+	void setUnit(Unit * unit);
 	Unit * getUnit() const;
 	Button * getMoveButton() const;
 	Button * getAttackButton() const;
 
 private:
+	Piece(int x, int y);
+
 	Unit * _unit;
 	Button * _move;
 	Button * _attack;

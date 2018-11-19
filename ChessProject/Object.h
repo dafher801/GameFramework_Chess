@@ -35,6 +35,7 @@ public:
 	void removeChild(Object * object);
 
 	void setPosition(int x, int y);
+	Vector2D getPosition() const;
 
 	void setAnchorPoint(float x, float y);
 
@@ -47,7 +48,7 @@ public:
 	void setVisible(bool visible);
 	bool isVisible() const;
 
-	Action * runAction(Action * action);
+	//Action * runAction(Action * action);
 
 protected:
 	Object(std::string fileName, std::string id);
