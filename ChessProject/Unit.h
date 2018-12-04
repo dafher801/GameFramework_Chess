@@ -30,6 +30,7 @@ public:
 
 	virtual void onVisibleButton() = 0;
 
+	bool isSelected() const;
 	void onSelected();
 	void offSelected();
 

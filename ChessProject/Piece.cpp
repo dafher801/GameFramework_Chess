@@ -48,8 +48,8 @@ bool Piece::init()
 	_attack->setPosition(LEFT_HIGH_X + (ONE_STEP * ((_coord / 10) - 1)),
 		LEFT_HIGH_Y + (ONE_STEP * ((_coord % 10) - 1)));
 
-	_move->setCommand(new UnitMove);
-	_move->setCommand(new UnitAttack);
+	_move->setCommand(new UnitMove(_move));
+	_attack->setCommand(new UnitAttack);
 
 	_move->setScale(_buttonScale);
 	_attack->setScale(_buttonScale);

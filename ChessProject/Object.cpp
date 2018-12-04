@@ -1,6 +1,7 @@
 #include "Chess.h"
 #include "Object.h"
 #include "TextureManager.h"
+#include "ActionManager.h"
 
 Object::Object(std::string fileName, std::string id)
 	: _ID(id)
@@ -163,8 +164,9 @@ bool Object::isVisible() const
 	return _visible;
 }
 
-//Action * Object::runAction(Action * action)
-//{
-//	action->setTarget(this);
-//	return action;
-//}
+Action * Object::runAction(Action * action)
+{
+	action->setTarget(this);
+	ActionManager::getInstance()->addAction(action);
+	return action;
+}

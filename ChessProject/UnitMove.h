@@ -6,8 +6,10 @@
 class UnitMove : public Command
 {
 public:
+	UnitMove(Button * button);
+
 	virtual void execute();
 
 private:
-	MoveTo * _action;
+	Button * _button;
 };

@@ -40,6 +40,11 @@ void Unit::draw()
 	Button::draw();
 }
 
+bool Unit::isSelected() const
+{
+	return _selected;
+}
+
 void Unit::onSelected()
 {
 	_selected = true;

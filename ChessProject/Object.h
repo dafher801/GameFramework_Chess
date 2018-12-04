@@ -48,7 +48,7 @@ public:
 	void setVisible(bool visible);
 	bool isVisible() const;
 
-	//Action * runAction(Action * action);
+	Action * runAction(Action * action);
 
 protected:
 	Object(std::string fileName, std::string id);

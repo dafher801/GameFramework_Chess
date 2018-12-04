@@ -6,7 +6,7 @@
 class MoveTo : public Action
 {
 public:
-	static MoveTo * create(float duration, const Vector2D & velocity);
+	static MoveTo * create(float duration, const Vector2D & position);
 
 	virtual bool init();
 	virtual void update();

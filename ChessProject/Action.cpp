@@ -1,4 +1,5 @@
 #include "Action.h"
+#include "Object.h"
 
 Action::Action()
 	: _target(nullptr) {}
