@@ -12,7 +12,7 @@ ActionManager * ActionManager::getInstance()
 
 void ActionManager::update()
 {
-	for (std::vector<Action*>::iterator iter = _actions.begin();
+	for (std::vector<Action *>::iterator iter = _actions.begin();
 		iter != _actions.end(); iter++)
 	{
 		if ((*iter)->isDone())
@@ -22,7 +22,13 @@ void ActionManager::update()
 	}
 }
 
-void ActionManager::addAction(Action * action)
+void ActionManager::addAction(Action * action, Object * object)
 {
 	_actions.push_back(action);
+	action->setTarget(object);
+}
+
+std::vector<Action *> ActionManager::getActions() const
+{
+	return _actions;
 }

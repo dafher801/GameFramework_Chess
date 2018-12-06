@@ -166,7 +166,6 @@ bool Object::isVisible() const
 
 Action * Object::runAction(Action * action)
 {
-	action->setTarget(this);
-	ActionManager::getInstance()->addAction(action);
+	ActionManager::getInstance()->addAction(action, this);
 	return action;
 }

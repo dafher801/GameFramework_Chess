@@ -11,12 +11,14 @@ public:
 
 	void update();
 
-	void addAction(Action * action);
+	void addAction(Action * action, Object * object);
+
+	std::vector<Action *> getActions() const;
 
 private:
 	ActionManager() {}
 
 	static ActionManager * _instance;
 
-	std::vector<Action*> _actions;
+	std::vector<Action *> _actions;
 };

@@ -5,7 +5,6 @@ class Object;
 class Action
 {
 public:
-	Action();
 
 	virtual bool init();
 	virtual void update() = 0;
@@ -15,5 +14,7 @@ public:
 	Object * getTarget() const;
 
 protected:
+	Action();
+
 	Object * _target;
 };
