@@ -2,21 +2,23 @@
 
 #include "Unit.h"
 
-#include <map>
+#include <vector>
 
 class UnitManager
 {
 public:
 	static UnitManager * getInstance();
 
-	std::map<int, Unit*>& getUnits();
+	std::vector<Unit*>& getUnits();
 
 	Unit * searchUnitByCoord(int key);
+
+	void DeleteUnit(Unit * unit);
 
 private:
 	UnitManager() {}
 
 	static UnitManager * _instance;
 
-	std::map<int, Unit*> _units;
+	std::vector<Unit*> _units;
 };

@@ -17,12 +17,29 @@ UnitManager * UnitManager::getInstance()
 	return _instance;
 }
 
-std::map<int, Unit*>& UnitManager::getUnits()
+std::vector<Unit*>& UnitManager::getUnits()
 {
 	return _units;
 }
 
 Unit * UnitManager::searchUnitByCoord(int key)
 {
-	return _units[key];
+	for (std::vector<Unit *>::iterator iter = _units.begin();
+		iter != _units.end(); iter++)
+	{
+		if (key == (*iter)->getCoord())
+			return *iter;
+	}
+
+	return nullptr;
+}
+
+void UnitManager::DeleteUnit(Unit * unit)
+{
+	for (std::vector<Unit *>::iterator iter = _units.begin();
+		iter != _units.end(); iter++)
+	{
+		if (*iter == unit)
+			_units.erase(iter);
+	}
 }

@@ -5,7 +5,6 @@
 MoveTo::MoveTo(float duration, const Vector2D & position)
 	: _duration(duration), _position(position), _operated(false)
 {
-	_duration = duration * DELAY_TIME;
 }
 
 MoveTo * MoveTo::create(float duration, const Vector2D & position)
@@ -40,8 +39,8 @@ void MoveTo::update()
 		first();
 	}
 
-	_position += _velocity;
-	_target->setPosition(_position.getX(), _position.getY());
+	Vector2D position = _target->getPosition() + _velocity;
+	_target->setPosition(position.getX(), position.getY());
 	_duration -= DELAY_TIME;
 }
 
@@ -52,5 +51,5 @@ bool MoveTo::isDone()
 
 void MoveTo::first()
 {
-	_velocity = (_position - _target->getPosition()) / _duration;
+	_velocity = ((_position - _target->getPosition()) / _duration) * DELAY_TIME;
 }

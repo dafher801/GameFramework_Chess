@@ -7,7 +7,6 @@ Unit::Unit(int coord, std::string fileName, std::string id)
 	: Button(fileName, id)
 	, _scale(1.8)
 	, _coord(coord)
-	, _selected(false)
 	
 	//체크 이미지에 쓰이는 변수들
 	/*, _makeCheckScale(1.0f)
@@ -63,4 +62,14 @@ Unit::NAME Unit::getName() const
 Unit::TEAM Unit::getTeam() const
 {
 	return _team;
+}
+
+int Unit::getCoord() const
+{
+	return _coord;
+}
+
+void Unit::setCoord(int coord)
+{
+	_coord = coord;
 }

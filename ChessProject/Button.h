@@ -19,8 +19,13 @@ public:
 
 	void handleInput();
 
+	bool isSelected() const;
+
 	void setCommand(Command * newCommand);
 	Command * getCommand() const;
+
+protected:
+	bool _selected;
 
 private:
 	Command * _command;

@@ -9,8 +9,6 @@ public:
 	UnitSelect(Unit * unit);
 
 	virtual void execute();
-
-	void onVisibleButton();
 	
 private:
 	Unit * _unit;

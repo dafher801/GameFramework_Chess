@@ -83,13 +83,16 @@ void Object::removeChild(Object * object)
 	}
 }
 
-void Object::setPosition(int x, int y)
+void Object::setPosition(float x, float y)
 {
 	_position.setX(x);
 	_position.setY(y);
 
 	_dstRect.x = x - (_srcRect.w * _anchorX);
 	_dstRect.y = y - (_srcRect.h * _anchorY);
+
+	setScaleX(_scaleX);
+	setScaleY(_scaleY);
 
 	for (Object * iter : _objects)
 		iter->setPosition(x, y);

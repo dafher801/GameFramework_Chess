@@ -16,9 +16,14 @@ void ActionManager::update()
 		iter != _actions.end(); iter++)
 	{
 		if ((*iter)->isDone())
+		{
 			(*iter)->update();
+		}
 		else
+		{
 			_actions.erase(iter);
+			break;
+		}
 	}
 }
 

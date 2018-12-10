@@ -2,7 +2,8 @@
 
 Button::Button(std::string fileName, std::string id)
 	: Object(fileName, id)
-	, _command(nullptr) {}
+	, _command(nullptr)
+	, _selected(false) {}
 
 Button * Button::create(std::string fileName, std::string id)
 {
@@ -30,8 +31,8 @@ bool Button::init()
 
 void Button::update()
 {
-	handleInput();
 	Object::update();
+	handleInput();
 }
 
 void Button::draw()
@@ -46,11 +47,27 @@ void Button::handleInput()
 		(int)InputHandler::getInstance()->getMousePosition()->getY()
 	};
 
-	if (InputHandler::getInstance()->getMouseButtonState(LEFT) &&
-		SDL_PointInRect(&_mousePoint, &_dstRect) && isVisible())
+	if (SDL_PointInRect(&_mousePoint, &_dstRect) && isVisible())
 	{
-		_command->execute();
+		if (!_selected && InputHandler::getInstance()->getMouseButtonState(LEFT))
+		{
+			_selected = true;
+		}
+
+		if (_selected && !InputHandler::getInstance()->getMouseButtonState(LEFT))
+		{
+			_command->execute();
+			_selected = false;
+		}
 	}
+
+	if (!SDL_PointInRect(&_mousePoint, &_dstRect))
+		_selected = false;
+}
+
+bool Button::isSelected() const
+{
+	return _selected;
 }
 
 void Button::setCommand(Command * newCommand)

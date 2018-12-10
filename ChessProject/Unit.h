@@ -37,6 +37,9 @@ public:
 	NAME getName() const;
 	TEAM getTeam() const;
 
+	int getCoord() const;
+	void setCoord(int coord);
+
 protected:
 
 	Unit(int coord, std::string fileName, std::string id);

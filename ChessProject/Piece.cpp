@@ -102,7 +102,7 @@ void Piece::makeUnit(Unit::NAME name, Unit::TEAM team)
 		break;
 	}
 
-	UnitManager::getInstance()->getUnits()[_coord] = _unit;
+	UnitManager::getInstance()->getUnits().push_back(_unit);
 }
 
 void Piece::setUnit(Unit * unit)

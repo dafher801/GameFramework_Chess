@@ -34,7 +34,7 @@ public:
 	void addChild(Object * object);
 	void removeChild(Object * object);
 
-	void setPosition(int x, int y);
+	void setPosition(float x, float y);
 	Vector2D getPosition() const;
 
 	void setAnchorPoint(float x, float y);
@@ -42,6 +42,8 @@ public:
 	void setScale(float scale);
 	void setScaleX(float scaleX);
 	void setScaleY(float scaleY);
+
+	float getScale() const;
 
 	SDL_Rect getRect() const;
 

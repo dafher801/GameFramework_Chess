@@ -8,7 +8,7 @@
 #include "TextureManager.h"
 
 #define FPS 60
-#define DELAY_TIME 1000.0f / FPS
+#define DELAY_TIME 0.06f
 
 typedef std::vector<Object*> ObjectManager;
 

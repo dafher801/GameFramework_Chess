@@ -1,5 +1,6 @@
 #include "Chess.h"
 #include "InputHandler.h"
+#include "ActionManager.h"
 
 Chess * Chess::_chess = nullptr;
 
@@ -37,6 +38,8 @@ void Chess::update()
 {
 	for (Object * object : _objects)
 		object->update();
+
+	ActionManager::getInstance()->update();
 }
 
 void Chess::render()

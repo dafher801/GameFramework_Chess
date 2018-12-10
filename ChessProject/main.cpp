@@ -17,8 +17,8 @@ int main(int argc, char * argv[])
 
 			frameTime = SDL_GetTicks() - frameStart;
 
-			if (frameTime < DELAY_TIME)
-				SDL_Delay((int)(DELAY_TIME - frameTime));
+			if (frameTime < 1000 / 60)
+				SDL_Delay((int)(1000 / 60 - frameTime));
 		}
 	}
 
