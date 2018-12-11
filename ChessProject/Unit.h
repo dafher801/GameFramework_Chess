@@ -29,6 +29,7 @@ public:
 	virtual void draw();
 
 	virtual void onVisibleButton() = 0;
+	virtual void move(int coord);
 
 	bool isSelected() const;
 	void onSelected();

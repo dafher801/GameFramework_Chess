@@ -15,6 +15,7 @@ public:
 	virtual void draw();
 
 	virtual void onVisibleButton();
+	virtual void move(int coord);
 
 private:
 	void onMoveButton(int x, int y, int direction, Unit::TEAM nowTurn);

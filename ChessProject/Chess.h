@@ -32,6 +32,8 @@ public:
 
 	Unit::TEAM getNowTurn() const;
 
+	void changeTurn();
+
 private:
 	Chess();
 

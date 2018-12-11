@@ -89,3 +89,16 @@ Unit::TEAM Chess::getNowTurn() const
 {
 	return _nowTurn;
 }
+
+void Chess::changeTurn()
+{
+	switch (_nowTurn)
+	{
+	case Unit::TEAM::BLACK:
+		_nowTurn = Unit::TEAM::WHITE;
+		break;
+	case Unit::TEAM::WHITE:
+		_nowTurn = Unit::TEAM::BLACK;
+		break;
+	}
+}

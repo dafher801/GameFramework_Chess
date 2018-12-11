@@ -21,7 +21,9 @@ void UnitMove::execute()
 				{
 					if (Board::getInstance()->getPieces()[i][j]->getMoveButton() == _button)
 					{
-						int x = (*iter)->getCoord() / 10 - 1;
+						(*iter)->move((i + 1) * 10 + j + 1);
+
+						/*int x = (*iter)->getCoord() / 10 - 1;
 						int y = (*iter)->getCoord() % 10 - 1;
 
 						if (Board::getInstance()->getPieces()[i][j]->getUnit())
@@ -34,7 +36,7 @@ void UnitMove::execute()
 							->getUnit()->setCoord((i + 1) * 10 + j + 1);
 
 						MoveTo * moveTo = MoveTo::create(2, _button->getPosition());
-						(*iter)->runAction(moveTo);
+						(*iter)->runAction(moveTo);*/
 					}
 				}
 			}
