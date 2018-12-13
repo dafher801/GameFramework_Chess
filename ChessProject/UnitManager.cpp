@@ -40,6 +40,9 @@ void UnitManager::DeleteUnit(Unit * unit)
 		iter != _units.end(); iter++)
 	{
 		if (*iter == unit)
+		{
 			_units.erase(iter);
+			break;
+		}
 	}
 }

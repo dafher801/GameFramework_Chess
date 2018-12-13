@@ -17,8 +17,8 @@ public:
 	virtual void onVisibleButton();
 
 private:
-	void onVisibleHigh(Unit::TEAM nowTurn);
-	void onVisibleRight(Unit::TEAM nowTurn);
-	void onVisibleLow(Unit::TEAM nowTurn);
-	void onVisibleLeft(Unit::TEAM nowTurn);
+	void onVisibleHigh();
+	void onVisibleRight();
+	void onVisibleLow();
+	void onVisibleLeft();
 };

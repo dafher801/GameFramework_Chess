@@ -19,7 +19,6 @@ public:
 
 private:
 	void onMoveButton(int x, int y, int direction, Unit::TEAM nowTurn);
-	void onAttackButton(int x, int y, int direction, Unit::TEAM nowTurn);
 
 	bool _moved;
 };

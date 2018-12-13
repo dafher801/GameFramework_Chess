@@ -9,6 +9,8 @@ public:
 	UnitSelect(Unit * unit);
 
 	virtual void execute();
+	void ExceptButton(int targetCoord);
+	bool CheckBySimulation(int targetCoord);
 	
 private:
 	Unit * _unit;

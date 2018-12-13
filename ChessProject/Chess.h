@@ -34,6 +34,8 @@ public:
 
 	void changeTurn();
 
+	bool isChecked() const;
+
 private:
 	Chess();
 
@@ -43,7 +45,16 @@ private:
 	SDL_Renderer * _renderer;
 	SDL_Rect _rect;
 
+	Board * _board;
+
 	bool _running;
 	Unit::TEAM _nowTurn;
 	ObjectManager _objects;
+
+	bool isCheckedByPawn(Unit * king) const;
+	bool isCheckedByKnight(Unit * king) const;
+	bool isCheckedByBishop(Unit * king) const;
+	bool isCheckedByRook(Unit * king) const;
+	bool isCheckedByQueen(Unit * king) const;
+	bool isCheckedByKing(Unit * king) const;
 };

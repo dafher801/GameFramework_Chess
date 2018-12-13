@@ -57,14 +57,14 @@ void Rook::onVisibleButton()
 {
 	if (Chess::getInstance()->getNowTurn() == _team)
 	{
-		onVisibleHigh(_team);
-		onVisibleRight(_team);
-		onVisibleLow(_team);
-		onVisibleLeft(_team);
+		onVisibleHigh();
+		onVisibleRight();
+		onVisibleLow();
+		onVisibleLeft();
 	}
 }
 
-void Rook::onVisibleHigh(Unit::TEAM nowTurn)
+void Rook::onVisibleHigh()
 {
 	int i;
 	int j;
@@ -78,13 +78,13 @@ void Rook::onVisibleHigh(Unit::TEAM nowTurn)
 	}
 
 	if (j >= 0 &&
-		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
 	{
-		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
+		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
 }
 
-void Rook::onVisibleRight(Unit::TEAM nowTurn)
+void Rook::onVisibleRight()
 {
 	int i;
 	int j;
@@ -98,13 +98,13 @@ void Rook::onVisibleRight(Unit::TEAM nowTurn)
 	}
 
 	if (i < LENGTH &&
-		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
 	{
-		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
+		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
 }
 
-void Rook::onVisibleLow(Unit::TEAM nowTurn)
+void Rook::onVisibleLow()
 {
 	int i;
 	int j;
@@ -118,13 +118,13 @@ void Rook::onVisibleLow(Unit::TEAM nowTurn)
 	}
 
 	if (j < LENGTH &&
-		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
 	{
-		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
+		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
 }
 
-void Rook::onVisibleLeft(Unit::TEAM nowTurn)
+void Rook::onVisibleLeft()
 {
 	int i;
 	int j;
@@ -138,8 +138,8 @@ void Rook::onVisibleLeft(Unit::TEAM nowTurn)
 	}
 
 	if (i >= 0 &&
-		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
 	{
-		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
+		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
 }

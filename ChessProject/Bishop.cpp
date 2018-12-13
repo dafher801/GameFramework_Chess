@@ -57,14 +57,14 @@ void Bishop::onVisibleButton()
 {
 	if (Chess::getInstance()->getNowTurn() == _team)
 	{
-		onVisibleRightHigh(_team);
-		onVisibleRightLow(_team);
-		onVisibleLeftLow(_team);
-		onVisibleLeftHigh(_team);
+		onVisibleRightHigh();
+		onVisibleRightLow();
+		onVisibleLeftLow();
+		onVisibleLeftHigh();
 	}
 }
 
-void Bishop::onVisibleRightHigh(Unit::TEAM nowTurn)
+void Bishop::onVisibleRightHigh()
 {
 	int i;
 	int j;
@@ -79,13 +79,13 @@ void Bishop::onVisibleRightHigh(Unit::TEAM nowTurn)
 	}
 
 	if (i < LENGTH && j < LENGTH &&
-		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
 	{
-		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
+		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
 }
 
-void Bishop::onVisibleRightLow(Unit::TEAM nowTurn)
+void Bishop::onVisibleRightLow()
 {
 	int i;
 	int j;
@@ -100,13 +100,13 @@ void Bishop::onVisibleRightLow(Unit::TEAM nowTurn)
 	}
 
 	if (i < LENGTH && j >= 0 &&
-		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
 	{
-		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
+		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
 }
 
-void Bishop::onVisibleLeftLow(Unit::TEAM nowTurn)
+void Bishop::onVisibleLeftLow()
 {
 	int i;
 	int j;
@@ -121,13 +121,13 @@ void Bishop::onVisibleLeftLow(Unit::TEAM nowTurn)
 	}
 
 	if (i >= 0 && j >= 0 &&
-		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
 	{
-		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
+		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
 }
 
-void Bishop::onVisibleLeftHigh(Unit::TEAM nowTurn)
+void Bishop::onVisibleLeftHigh()
 {
 	int i;
 	int j;
@@ -142,8 +142,8 @@ void Bishop::onVisibleLeftHigh(Unit::TEAM nowTurn)
 	}
 
 	if (i >= 0 && j < LENGTH &&
-		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != nowTurn)
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
 	{
-		Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(true);
+		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
 }

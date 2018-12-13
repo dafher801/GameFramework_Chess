@@ -10,7 +10,6 @@ void Command::execute()
 		for (j = 0; j < LENGTH; j++)
 		{
 			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(false);
-			Board::getInstance()->getPieces()[i][j]->getAttackButton()->setVisible(false);
 		}
 	}
 }

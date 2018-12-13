@@ -149,7 +149,6 @@
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MoveTo.cpp" />
-    <ClCompile Include="UnitAttack.cpp" />
     <ClCompile Include="UnitManager.cpp" />
     <ClCompile Include="UnitMove.cpp" />
     <ClCompile Include="UnitSelect.cpp" />
@@ -174,7 +173,6 @@
     <ClInclude Include="King.h" />
     <ClInclude Include="Knight.h" />
     <ClInclude Include="MoveTo.h" />
-    <ClInclude Include="UnitAttack.h" />
     <ClInclude Include="UnitManager.h" />
     <ClInclude Include="UnitMove.h" />
     <ClInclude Include="UnitSelect.h" />

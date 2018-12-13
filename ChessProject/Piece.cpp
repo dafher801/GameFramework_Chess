@@ -6,13 +6,11 @@
 #include "Queen.h"
 #include "King.h"
 #include "UnitMove.h"
-#include "UnitAttack.h"
 #include "UnitManager.h"
 
 Piece::Piece(int x, int y)
 	: _unit(nullptr)
 	, _move(nullptr)
-	, _attack(nullptr)
 	, _buttonScale(1.3)
 {
 	_coord = (10 * (x + 1)) + (y + 1);
@@ -40,33 +38,23 @@ bool Piece::init()
 		return false;
 
 	_move = Button::create("assets/images/MoveButton.png", "MoveButton");
-	_attack = Button::create("assets/images/AttackButton.png", "AttackButton");
 
 	_move->setPosition(LEFT_HIGH_X + (ONE_STEP * ((_coord / 10) - 1)),
 		LEFT_HIGH_Y + (ONE_STEP * ((_coord % 10) - 1)));
 
-	_attack->setPosition(LEFT_HIGH_X + (ONE_STEP * ((_coord / 10) - 1)),
-		LEFT_HIGH_Y + (ONE_STEP * ((_coord % 10) - 1)));
-
 	_move->setCommand(new UnitMove(_move));
-	_attack->setCommand(new UnitAttack);
-
 	_move->setScale(_buttonScale);
-	_attack->setScale(_buttonScale);
-
 	_move->setVisible(false);
-	_attack->setVisible(false);
 
 	return true;
 }
 
 void Piece::update()
 {
+	_move->update();
+
 	if (_unit)
 		_unit->update();
-
-	_move->update();
-	_attack->update();
 }
 
 void Piece::draw()
@@ -75,7 +63,6 @@ void Piece::draw()
 		_unit->draw();
 
 	_move->draw();
-	_attack->draw();
 }
 
 void Piece::makeUnit(Unit::NAME name, Unit::TEAM team)
@@ -118,9 +105,4 @@ Unit * Piece::getUnit() const
 Button * Piece::getMoveButton() const
 {
 	return _move;
-}
-
-Button * Piece::getAttackButton() const
-{
-	return _attack;
 }

@@ -17,12 +17,12 @@ public:
 	virtual void onVisibleButton();
 
 private:
-	void onVisibleHigh(Unit::TEAM nowTurn);
-	void onVisibleRightHigh(Unit::TEAM nowTurn);
-	void onVisibleRight(Unit::TEAM nowTurn);
-	void onVisibleRightLow(Unit::TEAM nowTurn);
-	void onVisibleLow(Unit::TEAM nowTurn);
-	void onVisibleLeftLow(Unit::TEAM nowTurn);
-	void onVisibleLeft(Unit::TEAM nowTurn);
-	void onVisibleLeftHigh(Unit::TEAM nowTurn);
+	void onVisibleHigh();
+	void onVisibleRightHigh();
+	void onVisibleRight();
+	void onVisibleRightLow();
+	void onVisibleLow();
+	void onVisibleLeftLow();
+	void onVisibleLeft();
+	void onVisibleLeftHigh();
 };

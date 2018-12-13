@@ -25,14 +25,12 @@ public:
 	void setUnit(Unit * unit);
 	Unit * getUnit() const;
 	Button * getMoveButton() const;
-	Button * getAttackButton() const;
 
 private:
 	Piece(int x, int y);
 
 	Unit * _unit;
 	Button * _move;
-	Button * _attack;
 
 	int _coord;
 

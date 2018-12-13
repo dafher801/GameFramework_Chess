@@ -10,14 +10,14 @@ Unit::Unit(int coord, std::string fileName, std::string id)
 	: Button(fileName, id)
 	, _scale(1.8)
 	, _coord(coord)
-	
+
 	//체크 이미지에 쓰이는 변수들
 	/*, _makeCheckScale(1.0f)
 	, _makeCheckOpacity(0)*/ {}
 
 bool Unit::init()
 {
-	if ( !Object::init() )
+	if (!Object::init())
 	{
 		return false;
 	}
@@ -42,17 +42,18 @@ void Unit::draw()
 	Button::draw();
 }
 
-void Unit::move(int coord)
+void Unit::move(int targetCoord)
 {
 	int x = _coord / 10 - 1;
 	int y = _coord % 10 - 1;
-	int i = coord / 10 - 1;
-	int j = coord % 10 - 1;
+	int i = targetCoord / 10 - 1;
+	int j = targetCoord % 10 - 1;
 
 	Chess::getInstance()->changeTurn();
 
 	if (Board::getInstance()->getPieces()[i][j]->getUnit())
-		UnitManager::getInstance()->DeleteUnit(Board::getInstance()->getPieces()[i][j]->getUnit());
+		UnitManager::getInstance()->DeleteUnit(
+			Board::getInstance()->getPieces()[i][j]->getUnit());
 
 	Board::getInstance()->getPieces()[x][y]->setUnit(nullptr);
 	Board::getInstance()->getPieces()[i][j]->setUnit(this);

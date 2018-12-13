@@ -75,9 +75,6 @@
     <ClCompile Include="UnitMove.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="UnitAttack.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="UnitManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -147,9 +144,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="UnitMove.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="UnitAttack.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="UnitManager.h">

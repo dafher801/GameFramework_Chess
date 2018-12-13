@@ -55,9 +55,7 @@ void Knight::draw()
 
 void Knight::onVisibleButton()
 {
-	Unit::TEAM nowTurn;
-
-	if ((nowTurn = Chess::getInstance()->getNowTurn()) != _team)
+	if (Chess::getInstance()->getNowTurn() != _team)
 		return;
 
 	int x = _coord / 10 - 1;
@@ -72,10 +70,10 @@ void Knight::onVisibleButton()
 				getPieces()[x + 1][y - 2]->getMoveButton()->setVisible(true);
 		}
 		else if (Board::getInstance()->
-			getPieces()[x + 1][y - 2]->getUnit()->getTeam() != nowTurn)
+			getPieces()[x + 1][y - 2]->getUnit()->getTeam() != _team)
 		{
 			Board::getInstance()->
-				getPieces()[x + 1][y - 2]->getAttackButton()->setVisible(true);
+				getPieces()[x + 1][y - 2]->getMoveButton()->setVisible(true);
 		}
 	}
 
@@ -88,10 +86,10 @@ void Knight::onVisibleButton()
 				getPieces()[x + 2][y - 1]->getMoveButton()->setVisible(true);
 		}
 		else if (Board::getInstance()->
-			getPieces()[x + 2][y - 1]->getUnit()->getTeam() != nowTurn)
+			getPieces()[x + 2][y - 1]->getUnit()->getTeam() != _team)
 		{
 			Board::getInstance()->
-				getPieces()[x + 2][y - 1]->getAttackButton()->setVisible(true);
+				getPieces()[x + 2][y - 1]->getMoveButton()->setVisible(true);
 		}
 	}
 
@@ -104,10 +102,10 @@ void Knight::onVisibleButton()
 				getPieces()[x - 1][y - 2]->getMoveButton()->setVisible(true);
 		}
 		else if (Board::getInstance()->
-			getPieces()[x - 1][y - 2]->getUnit()->getTeam() != nowTurn)
+			getPieces()[x - 1][y - 2]->getUnit()->getTeam() != _team)
 		{
 			Board::getInstance()->
-				getPieces()[x - 1][y - 2]->getAttackButton()->setVisible(true);
+				getPieces()[x - 1][y - 2]->getMoveButton()->setVisible(true);
 		}
 	}
 
@@ -120,10 +118,10 @@ void Knight::onVisibleButton()
 				getPieces()[x - 2][y - 1]->getMoveButton()->setVisible(true);
 		}
 		else if (Board::getInstance()->
-			getPieces()[x - 2][y - 1]->getUnit()->getTeam() != nowTurn)
+			getPieces()[x - 2][y - 1]->getUnit()->getTeam() != _team)
 		{
 			Board::getInstance()->
-				getPieces()[x - 2][y - 1]->getAttackButton()->setVisible(true);
+				getPieces()[x - 2][y - 1]->getMoveButton()->setVisible(true);
 		}
 	}
 
@@ -136,10 +134,10 @@ void Knight::onVisibleButton()
 				getPieces()[x + 1][y + 2]->getMoveButton()->setVisible(true);
 		}
 		else if (Board::getInstance()->
-			getPieces()[x + 1][y + 2]->getUnit()->getTeam() != nowTurn)
+			getPieces()[x + 1][y + 2]->getUnit()->getTeam() != _team)
 		{
 			Board::getInstance()->
-				getPieces()[x + 1][y + 2]->getAttackButton()->setVisible(true);
+				getPieces()[x + 1][y + 2]->getMoveButton()->setVisible(true);
 		}
 	}
 
@@ -152,10 +150,10 @@ void Knight::onVisibleButton()
 				getPieces()[x + 2][y + 1]->getMoveButton()->setVisible(true);
 		}
 		else if (Board::getInstance()->
-			getPieces()[x + 2][y + 1]->getUnit()->getTeam() != nowTurn)
+			getPieces()[x + 2][y + 1]->getUnit()->getTeam() != _team)
 		{
 			Board::getInstance()->
-				getPieces()[x + 2][y + 1]->getAttackButton()->setVisible(true);
+				getPieces()[x + 2][y + 1]->getMoveButton()->setVisible(true);
 		}
 	}
 
@@ -168,10 +166,10 @@ void Knight::onVisibleButton()
 				getPieces()[x - 1][y + 2]->getMoveButton()->setVisible(true);
 		}
 		else if (Board::getInstance()->
-			getPieces()[x - 1][y + 2]->getUnit()->getTeam() != nowTurn)
+			getPieces()[x - 1][y + 2]->getUnit()->getTeam() != _team)
 		{
 			Board::getInstance()->
-				getPieces()[x - 1][y + 2]->getAttackButton()->setVisible(true);
+				getPieces()[x - 1][y + 2]->getMoveButton()->setVisible(true);
 		}
 	}
 
@@ -184,10 +182,10 @@ void Knight::onVisibleButton()
 				getPieces()[x - 2][y + 1]->getMoveButton()->setVisible(true);
 		}
 		else if (Board::getInstance()->
-			getPieces()[x - 2][y + 1]->getUnit()->getTeam() != nowTurn)
+			getPieces()[x - 2][y + 1]->getUnit()->getTeam() != _team)
 		{
 			Board::getInstance()->
-				getPieces()[x - 2][y + 1]->getAttackButton()->setVisible(true);
+				getPieces()[x - 2][y + 1]->getMoveButton()->setVisible(true);
 		}
 	}
 }

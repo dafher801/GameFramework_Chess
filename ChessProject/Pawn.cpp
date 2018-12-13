@@ -75,7 +75,6 @@ void Pawn::onVisibleButton()
 	}
 
 	onMoveButton(x, y, direction, nowTurn);
-	onAttackButton(x, y, direction, nowTurn);
 }
 
 void Pawn::move(int coord)
@@ -131,42 +130,4 @@ void Pawn::onMoveButton(int x, int y, int direction, Unit::TEAM nowTurn)
 			button->GetAttackButton(_coord._x + 1, _coord._y - 1)->setVisible(true);
 		}*/
 	}
-}
-
-void Pawn::onAttackButton(int x, int y, int direction, Unit::TEAM nowTurn)
-{
-	//if (Board::getInstance()->getPieces()[x][y]->getUnit()->getTeam() == nowTurn)
-	//{
-	//	if (x > 0 &&
-	//		Board::getInstance()->getPieces()[x - 1][y + direction]->getUnit() &&
-	//		Board::getInstance()->
-	//		getPieces()[x - 1][y + direction]->getUnit()->getTeam() != nowTurn)
-	//	{
-	//		Board::getInstance()->
-	//			getPieces()[x - 1][y + direction]->getMoveButton()->setVisible(true);
-	//	}
-
-	//	/*if (x > 0 &&
-	//		trace->_unitTrace._unitInfo[_coord._x - 1][_coord._y - 1]._unit == PAWN &&
-	//		trace->_unitTrace._unitInfo[_coord._x - 1][_coord._y - 1]._team != nowTurn)
-	//	{
-	//		button->GetAttackButton(_coord._x - 1, _coord._y - 1)->setVisible(true);
-	//	}*/
-
-	//	if (x < LENGTH - 1 &&
-	//		Board::getInstance()->getPieces()[x + 1][y + direction]->getUnit() &&
-	//		Board::getInstance()->
-	//		getPieces()[x + 1][y + direction]->getUnit()->getTeam() != nowTurn)
-	//	{
-	//		Board::getInstance()->
-	//			getPieces()[x + 1][y + direction]->getAttackButton()->setVisible(true);
-	//	}
-
-	//	/*if (_coord._x < _boardLength - 1 &&
-	//		trace->_unitTrace._unitInfo[_coord._x + 1][_coord._y - 1]._unit == PAWN &&
-	//		trace->_unitTrace._unitInfo[_coord._x + 1][_coord._y - 1]._team != nowTurn)
-	//	{
-	//		button->GetAttackButton(_coord._x + 1, _coord._y - 1)->setVisible(true);
-	//	}*/
-	//}
 }
