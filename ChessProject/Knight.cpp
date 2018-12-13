@@ -150,8 +150,9 @@ bool Knight::isChecking() const
 	//¿À¸¥ÂÊ 1Ä­, À§ÂÊ 2Ä­
 	if (x + 1 < LENGTH && y - 2 >= 0)
 	{
-		if (!Board::getInstance()->getPieces()[x + 1][y - 2]->getUnit() ||
-			Board::getInstance()->getPieces()[x + 1][y - 2]->getUnit()->getTeam() != _team)
+		if (Board::getInstance()->getPieces()[x + 1][y - 2]->getUnit() &&
+			Board::getInstance()->getPieces()[x + 1][y - 2]->getUnit()->getTeam() != _team &&
+			Board::getInstance()->getPieces()[x + 1][y - 2]->getUnit()->getName() == Unit::NAME::KING)
 		{
 			return true;
 		}
@@ -160,8 +161,9 @@ bool Knight::isChecking() const
 	//¿À¸¥ÂÊ 2Ä­, À§ÂÊ 1Ä­
 	if (x + 2 < LENGTH && y - 1 >= 0)
 	{
-		if (!Board::getInstance()->getPieces()[x + 2][y - 1]->getUnit() ||
-			Board::getInstance()->getPieces()[x + 2][y - 1]->getUnit()->getTeam() != _team)
+		if (Board::getInstance()->getPieces()[x + 2][y - 1]->getUnit() &&
+			Board::getInstance()->getPieces()[x + 2][y - 1]->getUnit()->getTeam() != _team &&
+			Board::getInstance()->getPieces()[x + 2][y - 1]->getUnit()->getName() == Unit::NAME::KING)
 		{
 			return true;
 		}
@@ -170,8 +172,9 @@ bool Knight::isChecking() const
 	//¿ÞÂÊ 1Ä­, À§ÂÊ 2Ä­
 	if (x - 1 >= 0 && y - 2 >= 0)
 	{
-		if (!Board::getInstance()->getPieces()[x - 1][y - 2]->getUnit() ||
-			Board::getInstance()->getPieces()[x - 1][y - 2]->getUnit()->getTeam() != _team)
+		if (Board::getInstance()->getPieces()[x - 1][y - 2]->getUnit() &&
+			Board::getInstance()->getPieces()[x - 1][y - 2]->getUnit()->getTeam() != _team &&
+			Board::getInstance()->getPieces()[x - 1][y - 2]->getUnit()->getName() == Unit::NAME::KING)
 		{
 			return true;
 		}
@@ -180,8 +183,9 @@ bool Knight::isChecking() const
 	//¿ÞÂÊ 2Ä­, À§ÂÊ 1Ä­
 	if (x - 2 >= 0 && y - 1 >= 0)
 	{
-		if (!Board::getInstance()->getPieces()[x - 2][y - 1]->getUnit() ||
-			Board::getInstance()->getPieces()[x - 2][y - 1]->getUnit()->getTeam() != _team)
+		if (Board::getInstance()->getPieces()[x - 2][y - 1]->getUnit() &&
+			Board::getInstance()->getPieces()[x - 2][y - 1]->getUnit()->getTeam() != _team &&
+			Board::getInstance()->getPieces()[x - 2][y - 1]->getUnit()->getName() == Unit::NAME::KING)
 		{
 			return true;
 		}
@@ -190,8 +194,9 @@ bool Knight::isChecking() const
 	//¿À¸¥ÂÊ 1Ä­, ¾Æ·¡ÂÊ 2Ä­
 	if (x + 1 < LENGTH && y + 2 < LENGTH)
 	{
-		if (!Board::getInstance()->getPieces()[x + 1][y + 2]->getUnit() ||
-			Board::getInstance()->getPieces()[x + 1][y + 2]->getUnit()->getTeam() != _team)
+		if (Board::getInstance()->getPieces()[x + 1][y + 2]->getUnit() &&
+			Board::getInstance()->getPieces()[x + 1][y + 2]->getUnit()->getTeam() != _team &&
+			Board::getInstance()->getPieces()[x + 1][y + 2]->getUnit()->getName() == Unit::NAME::KING)
 		{
 			return true;
 		}
@@ -200,8 +205,9 @@ bool Knight::isChecking() const
 	//¿À¸¥ÂÊ 2Ä­, ¾Æ·¡ÂÊ 1Ä­
 	if (x + 2 < LENGTH && y + 1 < LENGTH)
 	{
-		if (!Board::getInstance()->getPieces()[x + 2][y + 1]->getUnit() ||
-			Board::getInstance()->getPieces()[x + 2][y + 1]->getUnit()->getTeam() != _team)
+		if (Board::getInstance()->getPieces()[x + 2][y + 1]->getUnit() &&
+			Board::getInstance()->getPieces()[x + 2][y + 1]->getUnit()->getTeam() != _team &&
+			Board::getInstance()->getPieces()[x + 2][y + 1]->getUnit()->getName() == Unit::NAME::KING)
 		{
 			return true;
 		}
@@ -210,8 +216,9 @@ bool Knight::isChecking() const
 	//¿ÞÂÊ 1Ä­, ¾Æ·¡ÂÊ 2Ä­
 	if (x - 1 >= 0 && y + 2 < LENGTH)
 	{
-		if (!Board::getInstance()->getPieces()[x - 1][y + 2]->getUnit() ||
-			Board::getInstance()->getPieces()[x - 1][y + 2]->getUnit()->getTeam() != _team)
+		if (Board::getInstance()->getPieces()[x - 1][y + 2]->getUnit() &&
+			Board::getInstance()->getPieces()[x - 1][y + 2]->getUnit()->getTeam() != _team &&
+			Board::getInstance()->getPieces()[x - 1][y + 2]->getUnit()->getName() == Unit::NAME::KING)
 		{
 			return true;
 		}
@@ -220,8 +227,9 @@ bool Knight::isChecking() const
 	//¿ÞÂÊ 2Ä­, ¾Æ·¡ÂÊ 1Ä­
 	if (x - 2 >= 0 && y + 1 < LENGTH)
 	{
-		if (!Board::getInstance()->getPieces()[x - 2][y + 1]->getUnit() ||
-			Board::getInstance()->getPieces()[x - 2][y + 1]->getUnit()->getTeam() != _team)
+		if (Board::getInstance()->getPieces()[x - 2][y + 1]->getUnit() &&
+			Board::getInstance()->getPieces()[x - 2][y + 1]->getUnit()->getTeam() != _team &&
+			Board::getInstance()->getPieces()[x - 2][y + 1]->getUnit()->getName() == Unit::NAME::KING)
 		{
 			return true;
 		}

@@ -66,7 +66,10 @@ void Rook::onVisibleButton()
 
 bool Rook::isChecking() const
 {
-	return false;
+	return isCheckingHigh() ||
+		isCheckingRight() ||
+		isCheckingLow() ||
+		isCheckingLeft();
 }
 
 void Rook::onVisibleHigh()
@@ -165,7 +168,10 @@ bool Rook::isCheckingHigh() const
 		j--;
 	}
 
-	if (j >= 0 && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+	if (j >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
 		return true;
 	}
@@ -188,7 +194,10 @@ bool Rook::isCheckingRight() const
 		i++;
 	}
 
-	if (i < LENGTH && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+	if (i < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
 		return true;
 	}
@@ -211,7 +220,10 @@ bool Rook::isCheckingLow() const
 		j++;
 	}
 
-	if (j < LENGTH && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+	if (j < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
 		return true;
 	}
@@ -234,7 +246,10 @@ bool Rook::isCheckingLeft() const
 		i--;
 	}
 
-	if (i >= 0 && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+	if (i >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
 		return true;
 	}

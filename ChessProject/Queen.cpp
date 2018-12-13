@@ -70,7 +70,14 @@ void Queen::onVisibleButton()
 
 bool Queen::isChecking() const
 {
-	return false;
+	return isCheckingHigh() ||
+		isCheckingRightHigh() ||
+		isCheckingRight() ||
+		isCheckingRightLow() ||
+		isCheckingLow() ||
+		isCheckingLeftLow() ||
+		isCheckingLeft() ||
+		isCheckingLeftHigh();
 }
 
 void Queen::onVisibleHigh()
@@ -249,6 +256,7 @@ bool Queen::isCheckingHigh() const
 	}
 
 	if (j >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
@@ -275,6 +283,7 @@ bool Queen::isCheckingRightHigh() const
 	}
 
 	if (i < LENGTH && j >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
@@ -300,6 +309,7 @@ bool Queen::isCheckingRight() const
 	}
 
 	if (i < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
@@ -326,6 +336,7 @@ bool Queen::isCheckingRightLow() const
 	}
 
 	if (i < LENGTH && j < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
@@ -351,6 +362,7 @@ bool Queen::isCheckingLow() const
 	}
 
 	if (j < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
@@ -377,6 +389,7 @@ bool Queen::isCheckingLeftLow() const
 	}
 
 	if (i >= 0 && j < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
@@ -402,6 +415,7 @@ bool Queen::isCheckingLeft() const
 	}
 
 	if (i >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
@@ -429,6 +443,7 @@ bool Queen::isCheckingLeftHigh() const
 	}
 
 	if (i >= 0 && j >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{

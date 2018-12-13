@@ -171,6 +171,7 @@ bool Bishop::isCheckRightHigh() const
 	}
 
 	if (i < LENGTH && j < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
@@ -196,7 +197,10 @@ bool Bishop::isCheckRightLow() const
 		j--;
 	}
 
-	if (i < LENGTH && j >= 0 && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+	if (i < LENGTH && j >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
 		return true;
 	}
@@ -221,7 +225,9 @@ bool Bishop::isCheckLeftLow() const
 	}
 
 	if (i >= 0 && j >= 0 &&
-		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
 		return true;
 	}
@@ -245,7 +251,10 @@ bool Bishop::isCheckLeftHigh() const
 		j++;
 	}
 
-	if (i >= 0 && j < LENGTH && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+	if (i >= 0 && j < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
 		return true;
 	}

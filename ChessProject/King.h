@@ -34,5 +34,5 @@ private:
 	bool isCheckingLow() const;
 	bool isCheckingLeftLow() const;
 	bool isCheckingLeft() const;
-	bool isCheckigLeftHigh() const;
+	bool isCheckingLeftHigh() const;
 };

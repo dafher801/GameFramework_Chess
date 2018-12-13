@@ -1,6 +1,7 @@
 #include "Board.h"
 #include "UnitSelect.h"
 #include "UnitManager.h"
+#include "Chess.h"
 
 UnitSelect::UnitSelect(Unit * unit)
 	: _unit(unit) {}
@@ -20,47 +21,40 @@ void UnitSelect::execute()
 	_unit->onSelected();
 	_unit->onVisibleButton();
 	
-	/*for (i = 0; i < LENGTH; i++)
+	for (i = 0; i < LENGTH; i++)
 		for (j = 0; j < LENGTH; j++)
 			if (Board::getInstance()->getPieces()[i][j]->getMoveButton()->isVisible())
 			{
 				ExceptButton((i + 1) * 10 + j + 1);
-			}*/
+			}
 }
 
 void UnitSelect::ExceptButton(int targetCoord)
 {
-	int x = targetCoord / 10 - 1;
-	int y = targetCoord % 10 - 1;
-	int i = _unit->getCoord() / 10 - 1;
-	int j = _unit->getCoord() % 10 - 1;
-
 	if (CheckBySimulation(targetCoord))
 	{
-		Board::getInstance()->getPieces()[x][y]->getMoveButton()->setVisible(false);
+		Board::getInstance()->hash(targetCoord)->getMoveButton()->setVisible(false);
 	}
 }
 
 bool UnitSelect::CheckBySimulation(int targetCoord)
 {
-	int x = targetCoord / 10 - 1;
-	int y = targetCoord % 10 - 1;
-	int i = _unit->getCoord() / 10 - 1;
-	int j = _unit->getCoord() % 10 - 1;
+	Board::getInstance()->hash(targetCoord)->setUnit(_unit);
+	Board::getInstance()->hash(_unit->getCoord())->setUnit(nullptr);
 
-	Unit * king = nullptr;
-
-	Board::getInstance()->getPieces()[x][y]->setUnit(_unit);
-	Board::getInstance()->getPieces()[i][j]->setUnit(nullptr);
+	//Chess::getInstance()->changeTurn();
 
 	for (Unit * iter : UnitManager::getInstance()->getUnits())
 	{
-		if (iter->getName() == Unit::NAME::KING && iter->getTeam() == _unit->getTeam())
+		if (iter->isChecking())
 		{
-			king = iter;
-			break;
+			Board::getInstance()->hash(_unit->getCoord())->setUnit(_unit);
+			Board::getInstance()->hash(targetCoord)->setUnit(nullptr);
+			return true;
 		}
 	}
 
+	Board::getInstance()->hash(_unit->getCoord())->setUnit(_unit);
+	Board::getInstance()->hash(targetCoord)->setUnit(nullptr);
 	return false;
 }

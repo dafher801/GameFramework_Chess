@@ -87,3 +87,14 @@ Piece * (* Board::getPieces())[8]
 {
 	return _pieces;
 }
+
+Piece * Board::hash(int coord)
+{
+	if ((coord / 10 - 1 > LENGTH || coord % 10 - 1 < 0) ||
+		(coord % 10 - 1 > LENGTH || coord % 10 - 1 < 0))
+	{
+		return nullptr;
+	}
+
+	return _pieces[coord / 10 - 1][coord % 10 - 1];
+}

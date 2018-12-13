@@ -16,6 +16,8 @@ public:
 
 	Piece * (* getPieces())[8];
 
+	Piece * hash(int coord);
+
 private:
 	Board();
 

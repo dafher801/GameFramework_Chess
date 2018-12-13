@@ -69,7 +69,14 @@ void King::onVisibleButton()
 
 bool King::isChecking() const
 {
-	return false;
+	return isCheckingHigh() ||
+		isCheckingRightHigh() ||
+		isCheckingRight() ||
+		isCheckingRightLow() ||
+		isCheckingLow() ||
+		isCheckingLeftLow() ||
+		isCheckingLeft() ||
+		isCheckingLeftHigh();
 }
 
 void King::onVisibleHigh()
@@ -242,6 +249,7 @@ bool King::isCheckingHigh() const
 
 	
 	if (j >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
 		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
@@ -258,16 +266,12 @@ bool King::isCheckingRightHigh() const
 	int i = x + 1;
 	int j = y - 1;
 
-	if (i < LENGTH && j >= 0)
+	if (i < LENGTH && j >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
-		if (!Board::getInstance()->getPieces()[i][j]->getUnit())
-		{
-			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-		}
-		else if (Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
-		{
-			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-		}
+		return true;
 	}
 
 	return false;
@@ -280,16 +284,12 @@ bool King::isCheckingRight() const
 	int i = x + 1;
 	int j = y;
 
-	if (i < LENGTH)
+	if (i < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
-		if (!Board::getInstance()->getPieces()[i][j]->getUnit())
-		{
-			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-		}
-		else if (Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
-		{
-			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-		}
+		return true;
 	}
 
 	return false;
@@ -302,16 +302,12 @@ bool King::isCheckingRightLow() const
 	int i = x + 1;
 	int j = y + 1;
 
-	if (i < LENGTH && j < LENGTH)
+	if (i < LENGTH && j < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
-		if (!Board::getInstance()->getPieces()[i][j]->getUnit())
-		{
-			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-		}
-		else if (Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
-		{
-			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-		}
+		return true;
 	}
 
 	return false;
@@ -324,16 +320,12 @@ bool King::isCheckingLow() const
 	int i = x;
 	int j = y + 1;
 
-	if (j < LENGTH)
+	if (j < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
-		if (!Board::getInstance()->getPieces()[i][j]->getUnit())
-		{
-			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-		}
-		else if (Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
-		{
-			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-		}
+		return true;
 	}
 
 	return false;
@@ -346,16 +338,12 @@ bool King::isCheckingLeftLow() const
 	int i = x - 1;
 	int j = y + 1;
 
-	if (i >= 0 && j < LENGTH)
+	if (i >= 0 && j < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
-		if (!Board::getInstance()->getPieces()[i][j]->getUnit())
-		{
-			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-		}
-		else if (Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
-		{
-			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-		}
+		return true;
 	}
 
 	return false;
@@ -368,38 +356,30 @@ bool King::isCheckingLeft() const
 	int i = x - 1;
 	int j = y;
 
-	if (i >= 0)
+	if (i >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
-		if (!Board::getInstance()->getPieces()[i][j]->getUnit())
-		{
-			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-		}
-		else if (Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
-		{
-			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-		}
+		return true;
 	}
 
 	return false;
 }
 
-bool King::isCheckigLeftHigh() const
+bool King::isCheckingLeftHigh() const
 {
 	int x = _coord / 10 - 1;
 	int y = _coord % 10 - 1;
 	int i = x - 1;
 	int j = y - 1;
 
-	if (i >= 0 && j >= 0)
+	if (i >= 0 && j >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit() &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
 	{
-		if (!Board::getInstance()->getPieces()[i][j]->getUnit())
-		{
-			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-		}
-		else if (Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
-		{
-			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
-		}
+		return true;
 	}
 
 	return false;
