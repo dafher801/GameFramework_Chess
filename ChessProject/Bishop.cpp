@@ -64,6 +64,12 @@ void Bishop::onVisibleButton()
 	}
 }
 
+bool Bishop::isChecking() const
+{
+	return isCheckLeftHigh() ||
+		isCheckLeftLow() || isCheckRightLow() || isCheckRightHigh();
+}
+
 void Bishop::onVisibleRightHigh()
 {
 	int i;
@@ -146,4 +152,103 @@ void Bishop::onVisibleLeftHigh()
 	{
 		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
+}
+
+bool Bishop::isCheckRightHigh() const
+{
+	int i;
+	int j;
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+
+	i = x + 1;
+	j = y + 1;
+
+	while (i < LENGTH && j < LENGTH && !Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		i++;
+		j++;
+	}
+
+	if (i < LENGTH && j < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool Bishop::isCheckRightLow() const
+{
+	int i;
+	int j;
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+
+	i = x + 1;
+	j = y - 1;
+
+	while (i < LENGTH && j >= 0 && !Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		i++;
+		j--;
+	}
+
+	if (i < LENGTH && j >= 0 && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool Bishop::isCheckLeftLow() const
+{
+	int i;
+	int j;
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+
+	i = x - 1;
+	j = y - 1;
+
+	while (i >= 0 && j >= 0 && !Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		i--;
+		j--;
+	}
+
+	if (i >= 0 && j >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool Bishop::isCheckLeftHigh() const
+{
+	int i;
+	int j;
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+
+	i = x - 1;
+	j = y + 1;
+
+	while (i >= 0 && j < LENGTH && !Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		i--;
+		j++;
+	}
+
+	if (i >= 0 && j < LENGTH && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+	{
+		return true;
+	}
+
+	return false;
 }

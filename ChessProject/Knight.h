@@ -15,4 +15,5 @@ public:
 	virtual void draw();
 
 	virtual void onVisibleButton();
+	virtual bool isChecking() const;
 };

@@ -41,6 +41,8 @@ public:
 	int getCoord() const;
 	void setCoord(int coord);
 
+	virtual bool isChecking() const = 0;
+
 protected:
 
 	Unit(int coord, std::string fileName, std::string id);

@@ -64,128 +64,168 @@ void Knight::onVisibleButton()
 	//¿À¸¥ÂÊ 1Ä­, À§ÂÊ 2Ä­
 	if (x + 1 < LENGTH && y - 2 >= 0)
 	{
-		if (!Board::getInstance()->getPieces()[x + 1][y - 2]->getUnit())
+		if (!Board::getInstance()->getPieces()[x + 1][y - 2]->getUnit() ||
+			Board::getInstance()->getPieces()[x + 1][y - 2]->getUnit()->getTeam() != _team)
 		{
-			Board::getInstance()->
-				getPieces()[x + 1][y - 2]->getMoveButton()->setVisible(true);
-		}
-		else if (Board::getInstance()->
-			getPieces()[x + 1][y - 2]->getUnit()->getTeam() != _team)
-		{
-			Board::getInstance()->
-				getPieces()[x + 1][y - 2]->getMoveButton()->setVisible(true);
+			Board::getInstance()->getPieces()[x + 1][y - 2]->getMoveButton()->setVisible(true);
 		}
 	}
 
 	//¿À¸¥ÂÊ 2Ä­, À§ÂÊ 1Ä­
 	if (x + 2 < LENGTH && y - 1 >= 0)
 	{
-		if (!Board::getInstance()->getPieces()[x + 2][y - 1]->getUnit())
+		if (!Board::getInstance()->getPieces()[x + 2][y - 1]->getUnit() ||
+			Board::getInstance()->getPieces()[x + 2][y - 1]->getUnit()->getTeam() != _team)
 		{
-			Board::getInstance()->
-				getPieces()[x + 2][y - 1]->getMoveButton()->setVisible(true);
-		}
-		else if (Board::getInstance()->
-			getPieces()[x + 2][y - 1]->getUnit()->getTeam() != _team)
-		{
-			Board::getInstance()->
-				getPieces()[x + 2][y - 1]->getMoveButton()->setVisible(true);
+			Board::getInstance()->getPieces()[x + 2][y - 1]->getMoveButton()->setVisible(true);
 		}
 	}
 
 	//¿ŞÂÊ 1Ä­, À§ÂÊ 2Ä­
 	if (x - 1 >= 0 && y - 2 >= 0)
 	{
-		if (!Board::getInstance()->getPieces()[x - 1][y - 2]->getUnit())
+		if (!Board::getInstance()->getPieces()[x - 1][y - 2]->getUnit() ||
+			Board::getInstance()->getPieces()[x - 1][y - 2]->getUnit()->getTeam() != _team)
 		{
-			Board::getInstance()->
-				getPieces()[x - 1][y - 2]->getMoveButton()->setVisible(true);
-		}
-		else if (Board::getInstance()->
-			getPieces()[x - 1][y - 2]->getUnit()->getTeam() != _team)
-		{
-			Board::getInstance()->
-				getPieces()[x - 1][y - 2]->getMoveButton()->setVisible(true);
+			Board::getInstance()->getPieces()[x - 1][y - 2]->getMoveButton()->setVisible(true);
 		}
 	}
 
 	//¿ŞÂÊ 2Ä­, À§ÂÊ 1Ä­
 	if (x - 2 >= 0 && y - 1 >= 0)
 	{
-		if (!Board::getInstance()->getPieces()[x - 2][y - 1]->getUnit())
+		if (!Board::getInstance()->getPieces()[x - 2][y - 1]->getUnit() ||
+			Board::getInstance()->getPieces()[x - 2][y - 1]->getUnit()->getTeam() != _team)
 		{
-			Board::getInstance()->
-				getPieces()[x - 2][y - 1]->getMoveButton()->setVisible(true);
-		}
-		else if (Board::getInstance()->
-			getPieces()[x - 2][y - 1]->getUnit()->getTeam() != _team)
-		{
-			Board::getInstance()->
-				getPieces()[x - 2][y - 1]->getMoveButton()->setVisible(true);
+			Board::getInstance()->getPieces()[x - 2][y - 1]->getMoveButton()->setVisible(true);
 		}
 	}
 
 	//¿À¸¥ÂÊ 1Ä­, ¾Æ·¡ÂÊ 2Ä­
 	if (x + 1 < LENGTH && y + 2 < LENGTH)
 	{
-		if (!Board::getInstance()->getPieces()[x + 1][y + 2]->getUnit())
+		if (!Board::getInstance()->getPieces()[x + 1][y + 2]->getUnit() ||
+			Board::getInstance()->getPieces()[x + 1][y + 2]->getUnit()->getTeam() != _team)
 		{
-			Board::getInstance()->
-				getPieces()[x + 1][y + 2]->getMoveButton()->setVisible(true);
-		}
-		else if (Board::getInstance()->
-			getPieces()[x + 1][y + 2]->getUnit()->getTeam() != _team)
-		{
-			Board::getInstance()->
-				getPieces()[x + 1][y + 2]->getMoveButton()->setVisible(true);
+			Board::getInstance()->getPieces()[x + 1][y + 2]->getMoveButton()->setVisible(true);
 		}
 	}
 
 	//¿À¸¥ÂÊ 2Ä­, ¾Æ·¡ÂÊ 1Ä­
 	if (x + 2 < LENGTH && y + 1 < LENGTH)
 	{
-		if (!Board::getInstance()->getPieces()[x + 2][y + 1]->getUnit())
+		if (!Board::getInstance()->getPieces()[x + 2][y + 1]->getUnit() ||
+			Board::getInstance()->getPieces()[x + 2][y + 1]->getUnit()->getTeam() != _team)
 		{
-			Board::getInstance()->
-				getPieces()[x + 2][y + 1]->getMoveButton()->setVisible(true);
-		}
-		else if (Board::getInstance()->
-			getPieces()[x + 2][y + 1]->getUnit()->getTeam() != _team)
-		{
-			Board::getInstance()->
-				getPieces()[x + 2][y + 1]->getMoveButton()->setVisible(true);
+			Board::getInstance()->getPieces()[x + 2][y + 1]->getMoveButton()->setVisible(true);
 		}
 	}
 
 	//¿ŞÂÊ 1Ä­, ¾Æ·¡ÂÊ 2Ä­
 	if (x - 1 >= 0 && y + 2 < LENGTH)
 	{
-		if (!Board::getInstance()->getPieces()[x - 1][y + 2]->getUnit())
+		if (!Board::getInstance()->getPieces()[x - 1][y + 2]->getUnit() ||
+			Board::getInstance()->getPieces()[x - 1][y + 2]->getUnit()->getTeam() != _team)
 		{
-			Board::getInstance()->
-				getPieces()[x - 1][y + 2]->getMoveButton()->setVisible(true);
-		}
-		else if (Board::getInstance()->
-			getPieces()[x - 1][y + 2]->getUnit()->getTeam() != _team)
-		{
-			Board::getInstance()->
-				getPieces()[x - 1][y + 2]->getMoveButton()->setVisible(true);
+			Board::getInstance()->getPieces()[x - 1][y + 2]->getMoveButton()->setVisible(true);
 		}
 	}
 
 	//¿ŞÂÊ 2Ä­, ¾Æ·¡ÂÊ 1Ä­
 	if (x - 2 >= 0 && y + 1 < LENGTH)
 	{
-		if (!Board::getInstance()->getPieces()[x - 2][y + 1]->getUnit())
+		if (!Board::getInstance()->getPieces()[x - 2][y + 1]->getUnit() ||
+			Board::getInstance()->getPieces()[x - 2][y + 1]->getUnit()->getTeam() != _team)
 		{
-			Board::getInstance()->
-				getPieces()[x - 2][y + 1]->getMoveButton()->setVisible(true);
-		}
-		else if (Board::getInstance()->
-			getPieces()[x - 2][y + 1]->getUnit()->getTeam() != _team)
-		{
-			Board::getInstance()->
-				getPieces()[x - 2][y + 1]->getMoveButton()->setVisible(true);
+			Board::getInstance()->getPieces()[x - 2][y + 1]->getMoveButton()->setVisible(true);
 		}
 	}
+}
+
+bool Knight::isChecking() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+
+	//¿À¸¥ÂÊ 1Ä­, À§ÂÊ 2Ä­
+	if (x + 1 < LENGTH && y - 2 >= 0)
+	{
+		if (!Board::getInstance()->getPieces()[x + 1][y - 2]->getUnit() ||
+			Board::getInstance()->getPieces()[x + 1][y - 2]->getUnit()->getTeam() != _team)
+		{
+			return true;
+		}
+	}
+
+	//¿À¸¥ÂÊ 2Ä­, À§ÂÊ 1Ä­
+	if (x + 2 < LENGTH && y - 1 >= 0)
+	{
+		if (!Board::getInstance()->getPieces()[x + 2][y - 1]->getUnit() ||
+			Board::getInstance()->getPieces()[x + 2][y - 1]->getUnit()->getTeam() != _team)
+		{
+			return true;
+		}
+	}
+
+	//¿ŞÂÊ 1Ä­, À§ÂÊ 2Ä­
+	if (x - 1 >= 0 && y - 2 >= 0)
+	{
+		if (!Board::getInstance()->getPieces()[x - 1][y - 2]->getUnit() ||
+			Board::getInstance()->getPieces()[x - 1][y - 2]->getUnit()->getTeam() != _team)
+		{
+			return true;
+		}
+	}
+
+	//¿ŞÂÊ 2Ä­, À§ÂÊ 1Ä­
+	if (x - 2 >= 0 && y - 1 >= 0)
+	{
+		if (!Board::getInstance()->getPieces()[x - 2][y - 1]->getUnit() ||
+			Board::getInstance()->getPieces()[x - 2][y - 1]->getUnit()->getTeam() != _team)
+		{
+			return true;
+		}
+	}
+
+	//¿À¸¥ÂÊ 1Ä­, ¾Æ·¡ÂÊ 2Ä­
+	if (x + 1 < LENGTH && y + 2 < LENGTH)
+	{
+		if (!Board::getInstance()->getPieces()[x + 1][y + 2]->getUnit() ||
+			Board::getInstance()->getPieces()[x + 1][y + 2]->getUnit()->getTeam() != _team)
+		{
+			return true;
+		}
+	}
+
+	//¿À¸¥ÂÊ 2Ä­, ¾Æ·¡ÂÊ 1Ä­
+	if (x + 2 < LENGTH && y + 1 < LENGTH)
+	{
+		if (!Board::getInstance()->getPieces()[x + 2][y + 1]->getUnit() ||
+			Board::getInstance()->getPieces()[x + 2][y + 1]->getUnit()->getTeam() != _team)
+		{
+			return true;
+		}
+	}
+
+	//¿ŞÂÊ 1Ä­, ¾Æ·¡ÂÊ 2Ä­
+	if (x - 1 >= 0 && y + 2 < LENGTH)
+	{
+		if (!Board::getInstance()->getPieces()[x - 1][y + 2]->getUnit() ||
+			Board::getInstance()->getPieces()[x - 1][y + 2]->getUnit()->getTeam() != _team)
+		{
+			return true;
+		}
+	}
+
+	//¿ŞÂÊ 2Ä­, ¾Æ·¡ÂÊ 1Ä­
+	if (x - 2 >= 0 && y + 1 < LENGTH)
+	{
+		if (!Board::getInstance()->getPieces()[x - 2][y + 1]->getUnit() ||
+			Board::getInstance()->getPieces()[x - 2][y + 1]->getUnit()->getTeam() != _team)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

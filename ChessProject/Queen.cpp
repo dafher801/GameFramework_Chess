@@ -68,6 +68,11 @@ void Queen::onVisibleButton()
 	}
 }
 
+bool Queen::isChecking() const
+{
+	return false;
+}
+
 void Queen::onVisibleHigh()
 {
 	int x = _coord / 10 - 1;
@@ -226,4 +231,209 @@ void Queen::onVisibleLeftHigh()
 	{
 		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
+}
+
+bool Queen::isCheckingHigh() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i;
+	int j;
+
+	i = x;
+	j = y - 1;
+
+	while (j >= 0 && !Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		j--;
+	}
+
+	if (j >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool Queen::isCheckingRightHigh() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i;
+	int j;
+
+	i = x + 1;
+	j = y - 1;
+
+	while (i < LENGTH && j >= 0 && !Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		i++;
+		j--;
+	}
+
+	if (i < LENGTH && j >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool Queen::isCheckingRight() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i;
+	int j;
+
+	i = x + 1;
+	j = y;
+
+	while (i < LENGTH && !Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		i++;
+	}
+
+	if (i < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool Queen::isCheckingRightLow() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i;
+	int j;
+
+	i = x + 1;
+	j = y + 1;
+
+	while (i < LENGTH && j < LENGTH && !Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		i++;
+		j++;
+	}
+
+	if (i < LENGTH && j < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool Queen::isCheckingLow() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i;
+	int j;
+
+	i = x;
+	j = y + 1;
+
+	while (j < LENGTH && !Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		j++;
+	}
+
+	if (j < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool Queen::isCheckingLeftLow() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i;
+	int j;
+
+	i = x - 1;
+	j = y + 1;
+
+	while (i >= 0 && j < LENGTH && !Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		i--;
+		j++;
+	}
+
+	if (i >= 0 && j < LENGTH &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool Queen::isCheckingLeft() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i;
+	int j;
+
+	i = x - 1;
+	j = y;
+
+	while (i >= 0 && !Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		i--;
+	}
+
+	if (i >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool Queen::isCheckingLeftHigh() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i;
+	int j;
+
+	i = x - 1;
+	j = y - 1;
+
+	while (i >= 0 && j >= 0 &&
+		!Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		i--;
+		j--;
+	}
+
+	if (i >= 0 && j >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
+	{
+		return true;
+	}
+
+	return false;
 }

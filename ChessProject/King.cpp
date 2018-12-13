@@ -67,6 +67,11 @@ void King::onVisibleButton()
 	}
 }
 
+bool King::isChecking() const
+{
+	return false;
+}
+
 void King::onVisibleHigh()
 {
 	int x = _coord / 10 - 1;
@@ -226,4 +231,176 @@ void King::onVisibleLeftHigh()
 			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 		}
 	}
+}
+
+bool King::isCheckingHigh() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i = x;
+	int j = y - 1;
+
+	
+	if (j >= 0 &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[i][j]->getUnit()->getName() == Unit::NAME::KING)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool King::isCheckingRightHigh() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i = x + 1;
+	int j = y - 1;
+
+	if (i < LENGTH && j >= 0)
+	{
+		if (!Board::getInstance()->getPieces()[i][j]->getUnit())
+		{
+			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+		}
+		else if (Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+		{
+			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+		}
+	}
+
+	return false;
+}
+
+bool King::isCheckingRight() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i = x + 1;
+	int j = y;
+
+	if (i < LENGTH)
+	{
+		if (!Board::getInstance()->getPieces()[i][j]->getUnit())
+		{
+			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+		}
+		else if (Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+		{
+			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+		}
+	}
+
+	return false;
+}
+
+bool King::isCheckingRightLow() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i = x + 1;
+	int j = y + 1;
+
+	if (i < LENGTH && j < LENGTH)
+	{
+		if (!Board::getInstance()->getPieces()[i][j]->getUnit())
+		{
+			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+		}
+		else if (Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+		{
+			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+		}
+	}
+
+	return false;
+}
+
+bool King::isCheckingLow() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i = x;
+	int j = y + 1;
+
+	if (j < LENGTH)
+	{
+		if (!Board::getInstance()->getPieces()[i][j]->getUnit())
+		{
+			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+		}
+		else if (Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+		{
+			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+		}
+	}
+
+	return false;
+}
+
+bool King::isCheckingLeftLow() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i = x - 1;
+	int j = y + 1;
+
+	if (i >= 0 && j < LENGTH)
+	{
+		if (!Board::getInstance()->getPieces()[i][j]->getUnit())
+		{
+			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+		}
+		else if (Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+		{
+			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+		}
+	}
+
+	return false;
+}
+
+bool King::isCheckingLeft() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i = x - 1;
+	int j = y;
+
+	if (i >= 0)
+	{
+		if (!Board::getInstance()->getPieces()[i][j]->getUnit())
+		{
+			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+		}
+		else if (Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+		{
+			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+		}
+	}
+
+	return false;
+}
+
+bool King::isCheckigLeftHigh() const
+{
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+	int i = x - 1;
+	int j = y - 1;
+
+	if (i >= 0 && j >= 0)
+	{
+		if (!Board::getInstance()->getPieces()[i][j]->getUnit())
+		{
+			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+		}
+		else if (Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+		{
+			Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
+		}
+	}
+
+	return false;
 }

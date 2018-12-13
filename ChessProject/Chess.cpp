@@ -326,6 +326,7 @@ bool Chess::isCheckedByRook(Unit * king) const
 
 	//困率 规氢
 
+	i = x;
 	j = y - 1;
 
 	while (j >= 0 && !_board->getPieces()[i][j]->getUnit())
@@ -403,6 +404,7 @@ bool Chess::isCheckedByQueen(Unit * king) const
 
 	//困率 规氢
 
+	i = x;
 	j = y - 1;
 
 	while (j >= 0 && !_board->getPieces()[i][j]->getUnit())

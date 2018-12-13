@@ -15,6 +15,7 @@ public:
 	virtual void draw();
 
 	virtual void onVisibleButton();
+	virtual bool isChecking() const;
 
 private:
 	void onVisibleHigh();
@@ -25,4 +26,13 @@ private:
 	void onVisibleLeftLow();
 	void onVisibleLeft();
 	void onVisibleLeftHigh();
+
+	bool isCheckingHigh() const;
+	bool isCheckingRightHigh() const;
+	bool isCheckingRight() const;
+	bool isCheckingRightLow() const;
+	bool isCheckingLow() const;
+	bool isCheckingLeftLow() const;
+	bool isCheckingLeft() const;
+	bool isCheckingLeftHigh() const;
 };

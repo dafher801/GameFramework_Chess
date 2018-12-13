@@ -64,6 +64,11 @@ void Rook::onVisibleButton()
 	}
 }
 
+bool Rook::isChecking() const
+{
+	return false;
+}
+
 void Rook::onVisibleHigh()
 {
 	int i;
@@ -142,4 +147,97 @@ void Rook::onVisibleLeft()
 	{
 		Board::getInstance()->getPieces()[i][j]->getMoveButton()->setVisible(true);
 	}
+}
+
+bool Rook::isCheckingHigh() const
+{
+	int i;
+	int j;
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+
+	i = x;
+	j = y - 1;
+
+	while (
+		j >= 0 && !Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		j--;
+	}
+
+	if (j >= 0 && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool Rook::isCheckingRight() const
+{
+	int i;
+	int j;
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+
+	i = x + 1;
+	j = y;
+
+	while (i < LENGTH && !Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		i++;
+	}
+
+	if (i < LENGTH && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool Rook::isCheckingLow() const
+{
+	int i;
+	int j;
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+
+	i = x;
+	j = y + 1;
+
+	while (j < LENGTH && !Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		j++;
+	}
+
+	if (j < LENGTH && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool Rook::isCheckingLeft() const
+{
+	int i;
+	int j;
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+
+	i = x - 1;
+	j = y;
+
+	while (i >= 0 && !Board::getInstance()->getPieces()[i][j]->getUnit())
+	{
+		i--;
+	}
+
+	if (i >= 0 && Board::getInstance()->getPieces()[i][j]->getUnit()->getTeam() != _team)
+	{
+		return true;
+	}
+
+	return false;
 }

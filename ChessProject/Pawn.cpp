@@ -83,6 +83,39 @@ void Pawn::move(int coord)
 	_moved = true;
 }
 
+bool Pawn::isChecking() const
+{
+	int direction;
+	int x = _coord / 10 - 1;
+	int y = _coord % 10 - 1;
+
+	switch (Chess::getInstance()->getNowTurn())
+	{
+	case BLACK:
+		direction = 1;
+		break;
+	case WHITE:
+		direction = -1;
+		break;
+	}
+
+	if (x > 0 && Board::getInstance()->getPieces()[x - 1][y + direction]->getUnit() &&
+		Board::getInstance()->getPieces()[x - 1][y + direction]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[x - 1][y + direction]->getUnit()->getName() == Unit::NAME::KING)
+	{
+		return true;
+	}
+
+	if (x < LENGTH - 1 && Board::getInstance()->getPieces()[x + 1][y + direction]->getUnit() &&
+		Board::getInstance()->getPieces()[x + 1][y + direction]->getUnit()->getTeam() != _team &&
+		Board::getInstance()->getPieces()[x + 1][y + direction]->getUnit()->getName() == Unit::NAME::KING)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 void Pawn::onMoveButton(int x, int y, int direction, Unit::TEAM nowTurn)
 {
 	if (Board::getInstance()->getPieces()[x][y]->getUnit()->getTeam() == nowTurn &&
@@ -100,8 +133,7 @@ void Pawn::onMoveButton(int x, int y, int direction, Unit::TEAM nowTurn)
 
 	if (Board::getInstance()->getPieces()[x][y]->getUnit()->getTeam() == nowTurn)
 	{
-		if (x > 0 &&
-			Board::getInstance()->getPieces()[x - 1][y + direction]->getUnit() &&
+		if (x > 0 && Board::getInstance()->getPieces()[x - 1][y + direction]->getUnit() &&
 			Board::getInstance()->getPieces()[x - 1][y + direction]->getUnit()->getTeam() != nowTurn)
 		{
 			Board::getInstance()->
@@ -115,8 +147,7 @@ void Pawn::onMoveButton(int x, int y, int direction, Unit::TEAM nowTurn)
 			button->GetAttackButton(_coord._x - 1, _coord._y - 1)->setVisible(true);
 		}*/
 
-		if (x < LENGTH - 1 &&
-			Board::getInstance()->getPieces()[x + 1][y + direction]->getUnit() &&
+		if (x < LENGTH - 1 && Board::getInstance()->getPieces()[x + 1][y + direction]->getUnit() &&
 			Board::getInstance()->getPieces()[x + 1][y + direction]->getUnit()->getTeam() != nowTurn)
 		{
 			Board::getInstance()->

@@ -15,10 +15,16 @@ public:
 	virtual void draw();
 
 	virtual void onVisibleButton();
+	virtual bool isChecking() const;
 
 private:
 	void onVisibleRightHigh();
 	void onVisibleRightLow();
 	void onVisibleLeftLow();
 	void onVisibleLeftHigh();
+
+	bool isCheckRightHigh() const;
+	bool isCheckRightLow() const;
+	bool isCheckLeftLow() const;
+	bool isCheckLeftHigh() const;
 };

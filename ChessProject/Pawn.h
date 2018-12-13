@@ -17,6 +17,8 @@ public:
 	virtual void onVisibleButton();
 	virtual void move(int coord);
 
+	virtual bool isChecking() const;
+
 private:
 	void onMoveButton(int x, int y, int direction, Unit::TEAM nowTurn);
 

@@ -20,12 +20,12 @@ void UnitSelect::execute()
 	_unit->onSelected();
 	_unit->onVisibleButton();
 	
-	for (i = 0; i < LENGTH; i++)
+	/*for (i = 0; i < LENGTH; i++)
 		for (j = 0; j < LENGTH; j++)
 			if (Board::getInstance()->getPieces()[i][j]->getMoveButton()->isVisible())
 			{
 				ExceptButton((i + 1) * 10 + j + 1);
-			}
+			}*/
 }
 
 void UnitSelect::ExceptButton(int targetCoord)
