@@ -2,7 +2,6 @@
 
 Button::Button(std::string fileName, std::string id)
 	: Object(fileName, id)
-	, _command(nullptr)
 	, _selected(false) {}
 
 Button * Button::create(std::string fileName, std::string id)
@@ -56,7 +55,11 @@ void Button::handleInput()
 
 		if (_selected && !InputHandler::getInstance()->getMouseButtonState(LEFT))
 		{
-			_command->execute();
+			for (Command * iter : _commands)
+			{
+				iter->execute();
+			}
+
 			_selected = false;
 		}
 	}
@@ -72,10 +75,10 @@ bool Button::isSelected() const
 
 void Button::setCommand(Command * newCommand)
 {
-	_command = newCommand;
+	_commands.push_back(newCommand);
 }
 
-Command * Button::getCommand() const
+std::vector<Command *> Button::getCommand() const
 {
-	return _command;
+	return _commands;
 }

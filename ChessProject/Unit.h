@@ -54,9 +54,4 @@ protected:
 	TEAM _team;						  //유닛 색깔
 
 	bool _selected;
-
-	//체크 이미지에 쓰이는 변수들
-	//Sprite * _makeCheck;			  //체크 이미지 파일
-	//const float _makeCheckScale;    //체크 이미지 크기
-	//const int _makeCheckOpacity;    //체크 이미지 투명도
 };

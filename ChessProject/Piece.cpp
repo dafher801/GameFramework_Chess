@@ -67,6 +67,12 @@ void Piece::draw()
 
 void Piece::makeUnit(Unit::NAME name, Unit::TEAM team)
 {
+	if (_unit)
+	{
+		UnitManager::getInstance()->DeleteUnit(_unit);
+		_unit = nullptr;
+	}
+
 	switch (name)
 	{
 	case Unit::NAME::PAWN:

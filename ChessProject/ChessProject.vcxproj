@@ -142,6 +142,8 @@
     <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Castling.cpp" />
+    <ClCompile Include="CastlingManager.cpp" />
     <ClCompile Include="Chess.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -149,6 +151,8 @@
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MoveTo.cpp" />
+    <ClCompile Include="Promotion.cpp" />
+    <ClCompile Include="PromotionManager.cpp" />
     <ClCompile Include="UnitManager.cpp" />
     <ClCompile Include="UnitMove.cpp" />
     <ClCompile Include="UnitSelect.cpp" />
@@ -167,12 +171,16 @@
     <ClInclude Include="Bishop.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Castling.h" />
+    <ClInclude Include="CastlingManager.h" />
     <ClInclude Include="Chess.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="King.h" />
     <ClInclude Include="Knight.h" />
     <ClInclude Include="MoveTo.h" />
+    <ClInclude Include="Promotion.h" />
+    <ClInclude Include="PromotionManager.h" />
     <ClInclude Include="UnitManager.h" />
     <ClInclude Include="UnitMove.h" />
     <ClInclude Include="UnitSelect.h" />

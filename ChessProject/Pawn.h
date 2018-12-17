@@ -16,7 +16,6 @@ public:
 
 	virtual void onVisibleButton();
 	virtual void move(int coord);
-
 	virtual bool isChecking() const;
 
 private:

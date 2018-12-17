@@ -10,10 +10,9 @@ void UnitMove::execute()
 	int i, j;
 	Command::execute();
 
-	for (std::vector<Unit *>::iterator iter = UnitManager::getInstance()->getUnits().begin();
-		iter != UnitManager::getInstance()->getUnits().end(); iter++)
+	for (Unit * iter : UnitManager::getInstance()->getUnits())
 	{
-		if ((*iter)->isSelected())
+		if (iter->isSelected())
 		{
 			for (i = 0; i < LENGTH; i++)
 			{
@@ -21,7 +20,7 @@ void UnitMove::execute()
 				{
 					if (Board::getInstance()->getPieces()[i][j]->getMoveButton() == _button)
 					{
-						(*iter)->move((i + 1) * 10 + j + 1);
+						iter->move((i + 1) * 10 + j + 1);
 						return;
 					}
 				}

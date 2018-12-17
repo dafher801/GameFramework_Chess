@@ -2,20 +2,27 @@
 #include "UnitSelect.h"
 #include "UnitManager.h"
 #include "Chess.h"
+#include "PromotionManager.h"
 
 UnitSelect::UnitSelect(Unit * unit)
 	: _unit(unit) {}
 
 void UnitSelect::execute()
 {
+	if (Chess::getInstance()->getCheckmate()->isVisible() ||
+		Chess::getInstance()->getStalemate()->isVisible() ||
+		PromotionManager::getInstance()->getPromotionMenu()->isVisible())
+	{
+		return;
+	}
+
 	int i, j;
 	Command::execute();
 
-	for (std::vector<Unit *>::iterator iter = UnitManager::getInstance()->getUnits().begin();
-		iter != UnitManager::getInstance()->getUnits().end(); iter++)
+	for (Unit * iter : UnitManager::getInstance()->getUnits())
 	{
-		if ((*iter)->isSelected())
-			(*iter)->offSelected();
+		if (iter->isSelected())
+			iter->offSelected();
 	}
 
 	_unit->onSelected();
@@ -32,29 +39,34 @@ void UnitSelect::execute()
 void UnitSelect::ExceptButton(int targetCoord)
 {
 	if (CheckBySimulation(targetCoord))
-	{
 		Board::getInstance()->hash(targetCoord)->getMoveButton()->setVisible(false);
-	}
 }
 
 bool UnitSelect::CheckBySimulation(int targetCoord)
 {
-	Board::getInstance()->hash(targetCoord)->setUnit(_unit);
+	bool isChecked = false;
+
+	Unit * start = Board::getInstance()->hash(_unit->getCoord())->getUnit();
+	Unit * target = Board::getInstance()->hash(targetCoord)->getUnit();
+
+	Board::getInstance()->hash(targetCoord)->setUnit(start);
 	Board::getInstance()->hash(_unit->getCoord())->setUnit(nullptr);
 
-	//Chess::getInstance()->changeTurn();
+	Chess::getInstance()->changeTurn();
 
 	for (Unit * iter : UnitManager::getInstance()->getUnits())
 	{
-		if (iter->isChecking())
+		if (iter != target && iter->getTeam() != start->getTeam() && iter->isChecking())
 		{
-			Board::getInstance()->hash(_unit->getCoord())->setUnit(_unit);
-			Board::getInstance()->hash(targetCoord)->setUnit(nullptr);
-			return true;
+			isChecked = true;
+			break;
 		}
 	}
 
-	Board::getInstance()->hash(_unit->getCoord())->setUnit(_unit);
-	Board::getInstance()->hash(targetCoord)->setUnit(nullptr);
-	return false;
+	Chess::getInstance()->changeTurn();
+
+	Board::getInstance()->hash(_unit->getCoord())->setUnit(start);
+	Board::getInstance()->hash(targetCoord)->setUnit(target);
+
+	return isChecked;
 }

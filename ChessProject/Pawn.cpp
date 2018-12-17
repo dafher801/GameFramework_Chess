@@ -89,7 +89,7 @@ bool Pawn::isChecking() const
 	int x = _coord / 10 - 1;
 	int y = _coord % 10 - 1;
 
-	switch (Chess::getInstance()->getNowTurn())
+	switch (_team)
 	{
 	case BLACK:
 		direction = 1;
@@ -147,7 +147,8 @@ void Pawn::onMoveButton(int x, int y, int direction, Unit::TEAM nowTurn)
 			button->GetAttackButton(_coord._x - 1, _coord._y - 1)->setVisible(true);
 		}*/
 
-		if (x < LENGTH - 1 && Board::getInstance()->getPieces()[x + 1][y + direction]->getUnit() &&
+		if (x < LENGTH - 1 &&
+			Board::getInstance()->getPieces()[x + 1][y + direction]->getUnit() &&
 			Board::getInstance()->getPieces()[x + 1][y + direction]->getUnit()->getTeam() != nowTurn)
 		{
 			Board::getInstance()->

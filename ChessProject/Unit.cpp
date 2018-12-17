@@ -9,11 +9,7 @@
 Unit::Unit(int coord, std::string fileName, std::string id)
 	: Button(fileName, id)
 	, _scale(1.8)
-	, _coord(coord)
-
-	//체크 이미지에 쓰이는 변수들
-	/*, _makeCheckScale(1.0f)
-	, _makeCheckOpacity(0)*/ {}
+	, _coord(coord) {}
 
 bool Unit::init()
 {
@@ -64,6 +60,20 @@ void Unit::move(int targetCoord)
 	MoveTo * moveTo = MoveTo::create(2,
 		Vector2D(LEFT_HIGH_X + (ONE_STEP * i), LEFT_HIGH_Y + (ONE_STEP * j)));
 	this->runAction(moveTo);
+
+	if (Chess::getInstance()->gameOver())
+	{
+		for (Unit * iter : UnitManager::getInstance()->getUnits())
+		{
+			if (iter->isChecking())
+			{
+				Chess::getInstance()->getCheckmate()->setVisible(true);
+				return;
+			}
+		}
+
+		Chess::getInstance()->getStalemate()->setVisible(true);
+	}
 }
 
 bool Unit::isSelected() const

@@ -1,9 +1,11 @@
 #pragma once
 
-#include <SDL.h>
 #include "Object.h"
 #include "Command.h"
 #include "InputHandler.h"
+
+#include <SDL.h>
+#include <vector>
 
 class Button : public Object
 {
@@ -22,12 +24,12 @@ public:
 	bool isSelected() const;
 
 	void setCommand(Command * newCommand);
-	Command * getCommand() const;
+	std::vector<Command *> getCommand() const;
 
 protected:
 	bool _selected;
 
 private:
-	Command * _command;
+	std::vector<Command *> _commands;
 	SDL_Point _mousePoint;
 };

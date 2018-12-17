@@ -1,5 +1,9 @@
-#include "King.h"
+#include "CastlingManager.h"
+#include "TextureManager.h"
+#include "UnitManager.h"
+#include "UnitSelect.h"
 #include "Chess.h"
+#include "King.h"
 
 King::King(int coord, std::string fileName, std::string id)
 	: Unit(coord, fileName, id) {}
@@ -64,7 +68,24 @@ void King::onVisibleButton()
 		onVisibleLeftLow();
 		onVisibleLeft();
 		onVisibleLeftHigh();
+
+		if (!_moved)
+		{
+			CastlingManager::getInstance()->onCastling(this);
+
+			if (checkCastling(_coord + 10))
+				Board::getInstance()->hash(_coord + 20)->getMoveButton()->setVisible(false);
+
+			if (checkCastling(_coord - 10))
+				Board::getInstance()->hash(_coord - 20)->getMoveButton()->setVisible(false);
+		}
 	}
+}
+
+void King::move(int coord)
+{
+	Unit::move(coord);
+	_moved = true;
 }
 
 bool King::isChecking() const
@@ -77,6 +98,11 @@ bool King::isChecking() const
 		isCheckingLeftLow() ||
 		isCheckingLeft() ||
 		isCheckingLeftHigh();
+}
+
+bool King::isMoved() const
+{
+	return _moved;
 }
 
 void King::onVisibleHigh()
@@ -383,4 +409,33 @@ bool King::isCheckingLeftHigh() const
 	}
 
 	return false;
+}
+
+bool King::checkCastling(int targetCoord)
+{
+	bool isChecked = false;
+
+	Unit * start = Board::getInstance()->hash(getCoord())->getUnit();
+	Unit * target = Board::getInstance()->hash(targetCoord)->getUnit();
+
+	Board::getInstance()->hash(targetCoord)->setUnit(start);
+	Board::getInstance()->hash(getCoord())->setUnit(nullptr);
+
+	Chess::getInstance()->changeTurn();
+
+	for (Unit * iter : UnitManager::getInstance()->getUnits())
+	{
+		if (iter != target && iter->isChecking())
+		{
+			isChecked = true;
+			break;
+		}
+	}
+
+	Chess::getInstance()->changeTurn();
+
+	Board::getInstance()->hash(getCoord())->setUnit(start);
+	Board::getInstance()->hash(targetCoord)->setUnit(target);
+
+	return isChecked;
 }

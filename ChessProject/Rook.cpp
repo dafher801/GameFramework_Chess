@@ -64,12 +64,23 @@ void Rook::onVisibleButton()
 	}
 }
 
+void Rook::move(int coord)
+{
+	Unit::move(coord);
+	_moved = true;
+}
+
 bool Rook::isChecking() const
 {
 	return isCheckingHigh() ||
 		isCheckingRight() ||
 		isCheckingLow() ||
 		isCheckingLeft();
+}
+
+bool Rook::isMoved() const
+{
+	return _moved;
 }
 
 void Rook::onVisibleHigh()

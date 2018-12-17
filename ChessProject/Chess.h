@@ -36,6 +36,11 @@ public:
 
 	bool isChecked() const;
 
+	bool gameOver();
+
+	Object * getCheckmate() const;
+	Object * getStalemate() const;
+
 private:
 	Chess();
 
@@ -51,10 +56,6 @@ private:
 	Unit::TEAM _nowTurn;
 	ObjectManager _objects;
 
-	bool isCheckedByPawn(Unit * king) const;
-	bool isCheckedByKnight(Unit * king) const;
-	bool isCheckedByBishop(Unit * king) const;
-	bool isCheckedByRook(Unit * king) const;
-	bool isCheckedByQueen(Unit * king) const;
-	bool isCheckedByKing(Unit * king) const;
+	Object * _checkmate;
+	Object * _stalemate;
 };

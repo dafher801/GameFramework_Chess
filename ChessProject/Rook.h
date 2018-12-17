@@ -15,9 +15,14 @@ public:
 	virtual void draw();
 
 	virtual void onVisibleButton();
+	virtual void move(int coord);
 	virtual bool isChecking() const;
 
+	bool isMoved() const;
+
 private:
+	bool _moved;
+
 	void onVisibleHigh();
 	void onVisibleRight();
 	void onVisibleLow();

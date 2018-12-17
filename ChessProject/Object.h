@@ -27,6 +27,9 @@ static __TYPE__ * create() \
 class Object
 {
 public:
+
+	static Object * create(std::string fileName, std::string id);
+
 	virtual bool init();
 	virtual void update();
 	virtual void draw();
@@ -43,8 +46,6 @@ public:
 	void setScaleX(float scaleX);
 	void setScaleY(float scaleY);
 
-	float getScale() const;
-
 	SDL_Rect getRect() const;
 
 	void setVisible(bool visible);
@@ -54,8 +55,6 @@ public:
 
 protected:
 	Object(std::string fileName, std::string id);
-
-	static Object * create(std::string fileName, std::string id);
 
 	std::string _ID;
 	std::string _fileName;
